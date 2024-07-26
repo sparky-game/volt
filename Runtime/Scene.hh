@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include "IDComponent.hh"
 #include "TagComponent.hh"
 #include <entt/src/entt/entt.hpp>
