@@ -1,9 +1,9 @@
 #pragma once
 
 #include <optional>
+#include <entt/entt.hpp>
 #include "IDComponent.hh"
 #include "TagComponent.hh"
-#include <entt/src/entt/entt.hpp>
 
 namespace volt::runtime {
   class Scene;
