@@ -10,6 +10,7 @@
 #include "../Runtime/BehaviourBounce.hh"
 
 // Systems
+#include "../Core/LogSystem.hh"
 #include "../Runtime/InputSystem.hh"
 #include "../Runtime/PhysicsSystem.hh"
 #include "../Renderer/RenderSystem.hh"
@@ -23,11 +24,11 @@
 extern volt::app::IAppBackend *CreateVoltApp(void);
 
 int main(void) {
-  // App creation
+  volt::core::LogSystem::Init();
+
   auto *app { CreateVoltApp() };
-  // App initialization
-  auto app_spec { app->Initialize() };
-  // Engine systems startup
+  auto app_spec { app->Init() };
+
   volt::renderer::RenderSystem renderer{{
       app_spec.renderer.width,
       app_spec.renderer.height,
@@ -39,11 +40,10 @@ int main(void) {
   volt::runtime::BehaviourSystem behaviour;
   volt::runtime::PhysicsSystem physics;
   volt::runtime::InputSystem input;
-  // Scene creation
+
   volt::runtime::Scene scene;
-  // App `OnStart` callback
   app->Start(scene);
-  // Engine loop
+
   while (renderer.IsRunning()) {
     auto t { volt::core::GetTimepoint() };
     input.Update(scene);
@@ -53,6 +53,6 @@ int main(void) {
     renderer.Update(scene);
     renderer.WaitIdle(t);
   }
-  // App destruction
+
   delete app;
 }

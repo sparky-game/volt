@@ -15,8 +15,8 @@ namespace volt::runtime {
     Scene *m_scene;
   public:
     Entity(EID id, Scene *scene);
-    inline const core::SnowflakeID &GetID(void)   { return GetComponent<IDComponent>().id; }
-    inline const std::string &GetName(void) { return GetComponent<TagComponent>().tag; }
+    inline const std::string &GetName(void)          { return GetComponent<TagComponent>().tag; }
+    inline core::SnowflakeID::value_type GetID(void) { return static_cast<core::SnowflakeID::value_type>(GetComponent<IDComponent>().id); }
     template <typename T>
     bool HasComponent(void) const;
     template <typename T, typename... Args>
