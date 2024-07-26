@@ -5,7 +5,7 @@
 <h1 align="center">
 <img src="assets/logo.png" alt="Volt Logo">
 <br/>
-<code>Volt</code>
+Volt
 </h1>
 #+end_html
 
