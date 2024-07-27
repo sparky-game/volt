@@ -12,7 +12,7 @@ Volt
 # Subtitle
 #+begin_html
 <h4 align="center">
-Write games, don't play them!
+Write games, don't play them
 </h4>
 #+end_html
 
