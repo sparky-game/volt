@@ -4,4 +4,4 @@
 #error The version number must be supplied from the build system.
 #endif
 
-#include "App/Entrypoint.hh"
+#include "src/App/Entrypoint.hh"
