@@ -1,6 +1,6 @@
 #include <fstream>
 #include "Sprite.hh"
-#include <picoPNG/picopng.hpp>
+#include "../Core/PNGDecode.hh"
 
 namespace volt::renderer {
   Sprite::Sprite(const std::filesystem::path &path) {
@@ -11,8 +11,7 @@ namespace volt::renderer {
     std::vector<unsigned char> raw { std::istreambuf_iterator<char>{ifs}, std::istreambuf_iterator<char>{} };
     std::vector<unsigned char> decoded;
     unsigned long width, height;
-    int err { decodePNG(decoded, width, height, raw.data(), raw.size()) };
-    if (err != 0) throw std::runtime_error { "unable to decode PNG (`" + std::string(path) + "`) [error " + std::to_string(err) + "]" };
+    if (not core::PNGDecode(decoded, width, height, raw.data(), raw.size())) throw std::runtime_error { "unable to decode PNG (`" + std::string(path) + "`)" };
     m_data.reserve(decoded.size() / 4);
     for (size_t i {0}; i < decoded.size(); i += 4) {
       uint32_t pixel {0};
