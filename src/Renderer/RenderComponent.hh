@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ISprite.hh"
+#include "Sprite.hh"
 
 namespace volt::renderer {
   struct RenderComponent {
-    ISprite *sprite { nullptr };
+    Sprite sprite;
     // Vector2<int32_t> position;
     int32_t position_x, position_y;
-    RenderComponent(ISprite *s) : sprite{s} {}
+    RenderComponent(const Sprite &s) : sprite{s} {}
   };
 }

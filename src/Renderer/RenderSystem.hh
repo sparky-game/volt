@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IWindow.hh"
+#include "Window.hh"
 #include "RenderSystemSpec.hh"
 #include "../Runtime/Scene.hh"
 #include "../Core/Timepoint.hh"
@@ -8,8 +8,8 @@
 namespace volt::renderer {
   class RenderSystem {
     RenderSystemSpec m_spec;
+    Window m_window;
     int64_t m_minFrameTime;
-    std::unique_ptr<IWindow> m_window { nullptr };
   public:
     RenderSystem(const RenderSystemSpec &spec);
     RenderSystem(const RenderSystem &) = delete;

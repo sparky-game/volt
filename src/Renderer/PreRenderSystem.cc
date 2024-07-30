@@ -17,5 +17,6 @@ namespace volt::renderer {
       r.position_x = std::round(p.position_x);
       r.position_y = std::round(p.position_y);
     });
+    BeginDrawing();
   }
 }
