@@ -1,6 +1,7 @@
 #include "WindowPTC.hh"
 #include "RenderSystem.hh"
 #include "RenderComponent.hh"
+#include "../Core/LogSystem.hh"
 
 namespace volt::renderer {
   RenderSystem::RenderSystem(const RenderSystemSpec &spec)
@@ -18,6 +19,11 @@ namespace volt::renderer {
       break;
     }
     m_window = std::make_unique<window_type>(m_spec.width, m_spec.height, m_spec.name.c_str());
+    VOLT_LOG_INFO("volt::renderer::RenderSystem :: created successfully");
+  }
+
+  RenderSystem::~RenderSystem(void) {
+    VOLT_LOG_INFO("volt::renderer::~RenderSystem :: destroyed successfully");
   }
 
   void RenderSystem::Update(runtime::Scene &s) {

@@ -1,6 +1,7 @@
 #include "InputSystem.hh"
 #include "InputComponent.hh"
 #include "PhysicsComponent.hh"
+#include "../Core/LogSystem.hh"
 
 #if defined(__linux__)
 #include <tinyPTC/src/linux/tinyptc.h>
@@ -12,6 +13,11 @@ namespace volt::runtime {
   InputSystem::InputSystem(void) {
     ptc_set_on_keypress(onKeyPress);
     ptc_set_on_keyrelease(onKeyRelease);
+    VOLT_LOG_INFO("volt::runtime::InputSystem :: created successfully");
+  }
+
+  InputSystem::~InputSystem(void) {
+    VOLT_LOG_INFO("volt::runtime::~InputSystem :: destroyed successfully");
   }
 
   void InputSystem::Update(Scene &s) {

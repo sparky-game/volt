@@ -10,6 +10,11 @@ namespace volt::runtime {
     static inline void onKeyRelease(core::KeyValueType k) { s_keyboard.OnKeyReleased(Value2Key(k)); }
   public:
     InputSystem(void);
+    InputSystem(const InputSystem &) = delete;
+    InputSystem(InputSystem &&) = delete;
+    InputSystem &operator=(const InputSystem &) = delete;
+    InputSystem &operator=(InputSystem &&) = delete;
+    ~InputSystem(void);
     void Update(Scene &s);
   };
 }

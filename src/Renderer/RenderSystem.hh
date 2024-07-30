@@ -16,6 +16,7 @@ namespace volt::renderer {
     RenderSystem(RenderSystem &&) = delete;
     RenderSystem &operator=(const RenderSystem &) = delete;
     RenderSystem &operator=(RenderSystem &&) = delete;
+    ~RenderSystem(void);
     void Update(runtime::Scene &s);
     bool IsRunning(void) const;
     void WaitIdle(const core::Timepoint &t) const;
