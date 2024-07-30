@@ -1,0 +1,8 @@
+function (volt_set_c_compiler)
+  find_program(VOLT_C_COMPILER clang)
+  if (VOLT_C_COMPILER)
+    set(CMAKE_C_COMPILER "${VOLT_C_COMPILER}" CACHE STRING "C compiler" FORCE)
+  else()
+    message(WARNING "clang not found, falling back to system's default compiler (${CMAKE_C_COMPILER})")
+  endif()
+endfunction()
