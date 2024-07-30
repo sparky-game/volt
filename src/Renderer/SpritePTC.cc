@@ -1,9 +1,9 @@
 #include <fstream>
-#include "Sprite.hh"
+#include "SpritePTC.hh"
 #include "../Core/PNGDecode.hh"
 
 namespace volt::renderer {
-  Sprite::Sprite(const std::filesystem::path &path) {
+  SpritePTC::SpritePTC(const std::filesystem::path &path) {
     if (not std::filesystem::exists(path)) throw std::runtime_error { "`" + std::string(path) + "` does not represent a valid path" };
     std::ifstream ifs { path, std::ios::binary };
     if (not ifs) throw std::runtime_error { "unable to open file (`" + std::string(path) + "`)" };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "IBehaviour.hh"
 
 namespace volt::runtime {

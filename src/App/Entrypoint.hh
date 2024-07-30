@@ -29,13 +29,7 @@ int main(void) {
   auto *app { CreateVoltApp() };
   auto app_spec { app->Init() };
 
-  volt::renderer::RenderSystem renderer{{
-      app_spec.renderer.width,
-      app_spec.renderer.height,
-      app_spec.renderer.name,
-      app_spec.renderer.max_fps
-    }
-  };
+  volt::renderer::RenderSystem renderer { app_spec.renderer };
   volt::renderer::PreRenderSystem pre_renderer;
   volt::runtime::BehaviourSystem behaviour;
   volt::runtime::PhysicsSystem physics;

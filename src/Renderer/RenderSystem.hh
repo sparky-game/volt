@@ -1,11 +1,17 @@
 #pragma once
 
-#include "Window.hh"
+#include "IWindow.hh"
 #include "../Runtime/Scene.hh"
 #include "../Core/Timepoint.hh"
 
 namespace volt::renderer {
+  enum class RenderSystemBackend {
+    Software,
+    Raylib
+  };
+
   struct RenderSystemSpec {
+    RenderSystemBackend backend;
     uint32_t width, height;
     std::string name;
     uint32_t max_fps;
@@ -13,8 +19,8 @@ namespace volt::renderer {
 
   class RenderSystem {
     RenderSystemSpec m_spec;
-    Window m_window;
     int64_t m_minFrameTime;
+    std::unique_ptr<IWindow> m_window { nullptr };
   public:
     RenderSystem(const RenderSystemSpec &spec);
     RenderSystem(const RenderSystem &) = delete;
