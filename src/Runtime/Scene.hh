@@ -9,6 +9,7 @@ namespace volt::runtime {
   class Scene;
 
   using EID = entt::entity;
+  using ECS_t = entt::registry;
 
   class Entity {
     EID m_id;
@@ -30,7 +31,7 @@ namespace volt::runtime {
 
   class Scene {
     friend class Entity;
-    entt::registry m_registry;
+    ECS_t m_registry;
     std::unordered_map<core::SnowflakeID::value_type, EID> m_ids;
   public:
     Scene(void) = default;

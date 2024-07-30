@@ -11,6 +11,7 @@ namespace volt::renderer {
     case RenderSystemBackend::Software:
       break;
     case RenderSystemBackend::Raylib:
+      assert(false && "RenderSystemBackend::Raylib isn't implemented yet");
       break;
     default:
       assert(false && "A valid RenderSystemBackend needs to be specified");
