@@ -48,3 +48,15 @@ Write games, don't play them
 * Build from source
 
 (...)
+
+#+begin_src sh
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+#+end_src
+
+(...)
+
+#+begin_src sh
+cmake --build build
+#+end_src
+
+(...)
