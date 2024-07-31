@@ -11,6 +11,8 @@ namespace volt::core {
     constexpr T Dot(const Vector3 &v) const noexcept;
     constexpr T LengthSquared(void) const noexcept;
     constexpr T Length(void) const noexcept;
+    constexpr Vector3 Normalize(void) const noexcept;
+    constexpr Vector3 Cross(const Vector3 &v) const noexcept;
     static constexpr T Dot(const Vector3 &u, const Vector3 &v) noexcept;
     static inline constexpr Vector3 zero(void)    noexcept { return {0, 0, 0};  }
     static inline constexpr Vector3 left(void)    noexcept { return {-1, 0, 0}; }
