@@ -49,6 +49,8 @@ Write games, don't play them
 
 * Build from source
 
+In order to build /Volt/ from source, preparation is needed so as to the environment is properly setup and ready.
+
 ** Get the code
 
 First, download the codebase of the project. It's important to do so via the *OFFICIAL* Git repository hosted on [[https://github.com/sparky-game/volt][GitHub]], and not through any tarball or compressed archive to ensure no tampering is done with the code. Appart from that, any ref can be checked out, being ~master~ (the trunk of all dev progress), a tagged commit (e.g. ~v1.0~), an actively maintained version branch (e.g. ~v1.0.y/stable~) or a LTS version branch (e.g. ~v1.0.y/lts~) the preferred ones.
