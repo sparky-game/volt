@@ -24,12 +24,7 @@ namespace volt::core {
   constexpr Vector3<T> Vector3<T>::Normalize(void) const noexcept {
     T len { Length() };
     if (not len) return *this;
-    // return *this / Length();
-    return {
-      m_x / len,
-      m_y / len,
-      m_z / len
-    };
+    return *this / len;
   }
 
   template <typename T>
@@ -68,9 +63,18 @@ namespace volt::core {
   template <typename T>
   constexpr Vector3<T> Vector3<T>::operator*(const T s) const noexcept {
     return {
-      s * m_x,
-      s * m_y,
-      s * m_z
+      m_x * s,
+      m_y * s,
+      m_z * s
+    };
+  }
+
+  template <typename T>
+  constexpr Vector3<T> Vector3<T>::operator/(const T s) const noexcept {
+    return {
+      m_x / s,
+      m_y / s,
+      m_z / s
     };
   }
 

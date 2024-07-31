@@ -27,6 +27,8 @@ namespace volt::core {
     constexpr Vector3 operator-(const Vector3 &v) const noexcept;
     constexpr T operator*(const Vector3 &v) const noexcept;
     constexpr Vector3 operator*(const T s) const noexcept;
+    constexpr Vector3 operator/(const T s) const noexcept;
     friend inline constexpr Vector3 operator*(const T s, const Vector3 &v) noexcept { return v * s; }
+    friend inline constexpr Vector3 operator/(const T s, const Vector3 &v) noexcept { return v / s; }
   };
 }
