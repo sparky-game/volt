@@ -1,6 +1,6 @@
 file(GLOB RAYLIB_SRCS CONFIGURE_DEPENDS "raylib/src/*.c")
 
-add_library(raylib STATIC ${RAYLIB_SRCS})
+add_library(raylib OBJECT ${RAYLIB_SRCS})
 
 target_compile_definitions(raylib PRIVATE PLATFORM_DESKTOP)
 
