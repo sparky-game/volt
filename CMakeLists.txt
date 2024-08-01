@@ -25,4 +25,5 @@ set(CMAKE_CXX_FLAGS_RELEASE "-pipe -O3")
 message(STATUS "The configured build type is ${CMAKE_BUILD_TYPE}")
 
 add_subdirectory(vendor)
+add_subdirectory(editor)
 add_subdirectory(src)

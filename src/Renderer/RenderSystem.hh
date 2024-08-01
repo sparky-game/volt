@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Window.hh"
-#include "RenderSystemSpec.hh"
 #include "../Runtime/Scene.hh"
 #include "../Core/Timepoint.hh"
 
@@ -10,6 +9,9 @@ namespace volt::renderer {
     RenderSystemSpec m_spec;
     Window m_window;
     int64_t m_minFrameTime;
+    bool m_closeRequested;
+    void editorLayerSetup(void) const;
+    void editorLayerDraw(void);
   public:
     RenderSystem(const RenderSystemSpec &spec);
     RenderSystem(const RenderSystem &) = delete;

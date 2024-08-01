@@ -3,18 +3,21 @@
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <optional>
 #include "Sprite.hh"
+#include "RenderSystemSpec.hh"
 
 namespace volt::renderer {
   class Window {
-    uint32_t m_width, m_height;
-    std::string m_name;
+    RenderSystemSpec m_spec;
+    std::optional<RenderTexture> m_editorViewport;
   public:
-    Window(uint32_t width, uint32_t height, const std::string &name);
+    Window(const RenderSystemSpec &spec);
     ~Window(void);
     bool IsOpen(void) const;
     void Clear(uint32_t color);
     void Draw(const Sprite &s, uint32_t x, uint32_t y);
     void Update(void);
+    const RenderTexture *getEditorViewportFBO(void) const;
   };
 }

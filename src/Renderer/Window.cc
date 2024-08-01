@@ -2,14 +2,19 @@
 #include "Window.hh"
 
 namespace volt::renderer {
-  Window::Window(uint32_t width, uint32_t height, const std::string &name)
-    : m_width{width}, m_height{height}, m_name{name}
+  Window::Window(const RenderSystemSpec &spec)
+    : m_spec{spec}
   {
     SetTraceLogLevel(LOG_WARNING);
     SetConfigFlags(FLAG_MSAA_4X_HINT);
     SetConfigFlags(FLAG_BORDERLESS_WINDOWED_MODE);
-    InitWindow(m_width, m_height, m_name.c_str());
+    if (m_spec.is_editor) SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    InitWindow(m_spec.width, m_spec.height, m_spec.name.c_str());
     assert(IsWindowReady());
+    if (m_spec.is_editor) {
+      m_editorViewport = LoadRenderTexture(m_spec.width, m_spec.height);
+      assert(IsRenderTextureReady(*m_editorViewport));
+    }
   }
 
   Window::~Window(void) {
@@ -25,10 +30,17 @@ namespace volt::renderer {
   }
 
   void Window::Draw(const Sprite &s, uint32_t x, uint32_t y) {
+    if (m_spec.is_editor) BeginTextureMode(*m_editorViewport);
     DrawTexture(s.data(), x, y, WHITE);
+    if (m_spec.is_editor) EndTextureMode();
   }
 
   void Window::Update(void) {
     EndDrawing();
+  }
+
+  const RenderTexture *Window::getEditorViewportFBO(void) const {
+    if (m_editorViewport) return &(*m_editorViewport);
+    return nullptr;
   }
 }

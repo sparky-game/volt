@@ -7,3 +7,9 @@
 [submodule "vendor/raylib"]
 	path = vendor/raylib
 	url = https://github.com/raysan5/raylib
+[submodule "vendor/imgui"]
+	path = vendor/imgui
+	url = https://github.com/ocornut/imgui
+[submodule "vendor/imgui_impl_raylib"]
+	path = vendor/imgui_impl_raylib
+	url = https://github.com/raylib-extras/rlImGui
