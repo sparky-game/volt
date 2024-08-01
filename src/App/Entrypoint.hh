@@ -30,7 +30,7 @@ int main(void) {
   auto app_spec { app->Init() };
 
   volt::renderer::RenderSystem renderer { app_spec.renderer };
-  volt::renderer::PreRenderSystem pre_renderer;
+  volt::renderer::PreRenderSystem pre_renderer { renderer };
   volt::runtime::BehaviourSystem behaviour;
   volt::runtime::PhysicsSystem physics;
   volt::runtime::InputSystem input;
@@ -44,6 +44,7 @@ int main(void) {
     behaviour.Update(scene);
     physics.Update(scene);
     pre_renderer.Update(scene);
+    app->Update(scene);
     renderer.Update(scene);
     renderer.WaitIdle(t);
   }

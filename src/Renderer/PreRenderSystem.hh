@@ -1,10 +1,13 @@
 #pragma once
 
+#include "RenderSystem.hh"
 #include "../Runtime/Scene.hh"
 
 namespace volt::renderer {
-  struct PreRenderSystem {
-    PreRenderSystem(void);
+  class PreRenderSystem {
+    const RenderSystem &m_renderer;
+  public:
+    PreRenderSystem(const RenderSystem &renderer);
     PreRenderSystem(const PreRenderSystem &) = delete;
     PreRenderSystem(PreRenderSystem &&) = delete;
     PreRenderSystem &operator=(const PreRenderSystem &) = delete;

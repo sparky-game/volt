@@ -10,7 +10,7 @@ namespace volt::renderer {
     rlImGuiSetup(true);
     ImGuiIO &imgui_io { ImGui::GetIO() };
     imgui_io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    imgui_io.IniFilename = nullptr;
+    // imgui_io.IniFilename = nullptr;
     imgui_io.LogFilename = nullptr;
     imgui_io.ConfigWindowsMoveFromTitleBarOnly = true;
   }
@@ -18,6 +18,15 @@ namespace volt::renderer {
   void RenderSystem::editorLayerDraw(void) {
     rlImGuiBegin();
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
+    editorLayerDrawMenubar();
+    editorLayerDrawScene();
+    editorLayerDrawHierarchy();
+    editorLayerDrawInspector();
+    rlImGuiEnd();
+    editorLayerDrawStats();
+  }
+
+  void RenderSystem::editorLayerDrawMenubar(void) {
     if (ImGui::BeginMainMenuBar()) {
       if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("Exit")) m_closeRequested = true;
@@ -25,19 +34,42 @@ namespace volt::renderer {
       }
       ImGui::EndMainMenuBar();
     }
+  }
+
+  void RenderSystem::editorLayerDrawScene(void) {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     if (ImGui::Begin("Scene")) {
-      rlImGuiImageRenderTextureFit(m_window.getEditorViewportFBO(), true);
+      rlImGuiImageRenderTextureFit(m_window.GetEditorViewportFBO(), true);
     }
     ImGui::End();
     ImGui::PopStyleVar();
-    rlImGuiEnd();
+  }
+
+  void RenderSystem::editorLayerDrawHierarchy(void) {
+    if (ImGui::Begin("Hierarchy")) {
+      // ...
+    }
+    ImGui::End();
+  }
+
+  void RenderSystem::editorLayerDrawInspector(void) {
+    if (ImGui::Begin("Inspector")) {
+      // ...
+    }
+    ImGui::End();
+  }
+
+  void RenderSystem::editorLayerDrawStats(void) {
+    DrawText(TextFormat("FPS: %u (%.1f ms)", GetFPS(), GetFrameTime() * 1000),
+             GetScreenWidth() - 190,
+             GetScreenHeight() - 40,
+             14, LIGHTGRAY);
   }
 
   RenderSystem::RenderSystem(const RenderSystemSpec &spec)
     : m_spec{spec}, m_window{m_spec}, m_minFrameTime{static_cast<int64_t>(1e9) / m_spec.max_fps}, m_closeRequested{false}
   {
-    if (m_spec.is_editor) editorLayerSetup();
+    if (IsEditor()) editorLayerSetup();
     VOLT_LOG_INFO("volt::renderer::RenderSystem :: created successfully");
   }
 
@@ -46,11 +78,14 @@ namespace volt::renderer {
   }
 
   void RenderSystem::Update(runtime::Scene &s) {
-    m_window.Clear(0);
+    if (IsEditor()) BeginTextureMode(*m_window.GetEditorViewportFBO());
     s.ForAll<RenderComponent>([this]([[maybe_unused]] auto e, auto &r) {
       m_window.Draw(r.sprite, r.position_x, r.position_y);
     });
-    if (m_spec.is_editor) editorLayerDraw();
+    if (IsEditor()) {
+      EndTextureMode();
+      editorLayerDraw();
+    }
     m_window.Update();
   }
 

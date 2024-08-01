@@ -4,7 +4,7 @@
 #include "../Runtime/PhysicsComponent.hh"
 
 namespace volt::renderer {
-  PreRenderSystem::PreRenderSystem(void) {
+  PreRenderSystem::PreRenderSystem(const RenderSystem &renderer) : m_renderer{renderer} {
     VOLT_LOG_INFO("volt::renderer::PreRenderSystem :: created successfully");
   }
 
@@ -18,5 +18,6 @@ namespace volt::renderer {
       r.position_y = std::round(p.position_y);
     });
     BeginDrawing();
+    m_renderer.GetWindowHandle()->Clear(0);
   }
 }

@@ -12,6 +12,7 @@ namespace volt::renderer {
     InitWindow(m_spec.width, m_spec.height, m_spec.name.c_str());
     assert(IsWindowReady());
     if (m_spec.is_editor) {
+      SetExitKey(0);
       m_editorViewport = LoadRenderTexture(m_spec.width, m_spec.height);
       assert(IsRenderTextureReady(*m_editorViewport));
     }
@@ -25,7 +26,7 @@ namespace volt::renderer {
     return not WindowShouldClose();
   }
 
-  void Window::Clear(uint32_t color) {
+  void Window::Clear(uint32_t color) const {
     ClearBackground(GetColor(color));
   }
 
@@ -39,7 +40,7 @@ namespace volt::renderer {
     EndDrawing();
   }
 
-  const RenderTexture *Window::getEditorViewportFBO(void) const {
+  const RenderTexture *Window::GetEditorViewportFBO(void) const {
     if (m_editorViewport) return &(*m_editorViewport);
     return nullptr;
   }

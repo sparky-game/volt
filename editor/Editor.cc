@@ -19,6 +19,10 @@ struct Editor : public volt::app::IAppBackend {
   void Start(volt::runtime::Scene &) final {
     // ...
   }
+
+  void Update(volt::runtime::Scene &) final {
+    // ...
+  }
 };
 
 volt::app::IAppBackend *CreateVoltApp(void) { return new Editor; }

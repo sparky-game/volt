@@ -15,9 +15,9 @@ namespace volt::renderer {
     Window(const RenderSystemSpec &spec);
     ~Window(void);
     bool IsOpen(void) const;
-    void Clear(uint32_t color);
+    void Clear(uint32_t color) const;
     void Draw(const Sprite &s, uint32_t x, uint32_t y);
     void Update(void);
-    const RenderTexture *getEditorViewportFBO(void) const;
+    const RenderTexture *GetEditorViewportFBO(void) const;
   };
 }
