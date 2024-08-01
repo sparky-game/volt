@@ -1,4 +1,5 @@
 #include "Scene.hh"
+#include "TransformComponent.hh"
 
 namespace volt::runtime {
   Entity::Entity(EID id, Scene *scene)
@@ -14,6 +15,7 @@ namespace volt::runtime {
     e.AddComponent<IDComponent>(id);
     auto &t { e.AddComponent<TagComponent>() };
     t.tag = name.empty() ? "Entity" : name;
+    e.AddComponent<TransformComponent>();
     m_ids[id] = e;
     return e;
   }

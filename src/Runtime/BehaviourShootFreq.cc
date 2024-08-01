@@ -1,6 +1,6 @@
 #include "Scene.hh"
-#include "PhysicsComponent.hh"
 #include "BehaviourShootFreq.hh"
+#include "TransformComponent.hh"
 
 namespace volt::runtime {
   BehaviourShootFreq::BehaviourShootFreq(uint32_t count)
@@ -8,8 +8,8 @@ namespace volt::runtime {
   {}
 
   void BehaviourShootFreq::Run(Entity &e) {
-    if (e.HasComponent<PhysicsComponent>()) {
-      [[maybe_unused]] auto &p { e.GetComponent<PhysicsComponent>() };
+    if (e.HasComponent<TransformComponent>()) {
+      [[maybe_unused]] auto &t { e.GetComponent<TransformComponent>() };
       if (counter-- == 0) {
         // Shoot?
         counter = initialCount;

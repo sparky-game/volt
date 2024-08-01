@@ -1,6 +1,7 @@
 #include "PhysicsSystem.hh"
-#include "PhysicsComponent.hh"
 #include "../Core/LogSystem.hh"
+#include "TransformComponent.hh"
+#include "Rigidbody2DComponent.hh"
 
 namespace volt::runtime {
   PhysicsSystem::PhysicsSystem(void) {
@@ -12,9 +13,9 @@ namespace volt::runtime {
   }
 
   void PhysicsSystem::Update(Scene &s) {
-    s.ForAll<PhysicsComponent>([]([[maybe_unused]] auto e, auto &p) {
-      p.position_x += p.velocity_x;
-      p.position_y += p.velocity_y;
+    s.ForAll<TransformComponent, Rigidbody2DComponent>([]([[maybe_unused]] auto e, auto &t, auto &rb) {
+      t.position_x += rb.velocity_x;
+      t.position_y += rb.velocity_y;
     });
   }
 }

@@ -1,7 +1,7 @@
 #include "PreRenderSystem.hh"
 #include "RenderComponent.hh"
 #include "../Core/LogSystem.hh"
-#include "../Runtime/PhysicsComponent.hh"
+#include "../Runtime/TransformComponent.hh"
 
 namespace volt::renderer {
   PreRenderSystem::PreRenderSystem(const RenderSystem &renderer) : m_renderer{renderer} {
@@ -13,9 +13,9 @@ namespace volt::renderer {
   }
 
   void PreRenderSystem::Update(runtime::Scene &s) {
-    s.ForAll<RenderComponent, runtime::PhysicsComponent>([]([[maybe_unused]] auto e, auto &r, auto &p) {
-      r.position_x = std::round(p.position_x);
-      r.position_y = std::round(p.position_y);
+    s.ForAll<RenderComponent, runtime::TransformComponent>([]([[maybe_unused]] auto e, auto &r, auto &t) {
+      r.position_x = std::round(t.position_x);
+      r.position_y = std::round(t.position_y);
     });
     BeginDrawing();
     m_renderer.GetWindowHandle()->Clear(0);

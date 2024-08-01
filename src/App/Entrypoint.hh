@@ -2,9 +2,10 @@
 
 // Components
 #include "../Runtime/InputComponent.hh"
-#include "../Runtime/PhysicsComponent.hh"
 #include "../Renderer/RenderComponent.hh"
+#include "../Runtime/TransformComponent.hh"
 #include "../Runtime/BehaviourComponent.hh"
+#include "../Runtime/Rigidbody2DComponent.hh"
 
 // Behaviours
 #include "../Runtime/BehaviourBounce.hh"
