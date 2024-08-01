@@ -11,11 +11,11 @@ namespace volt::renderer {
     int64_t m_minFrameTime;
     bool m_closeRequested;
     void editorLayerSetup(void) const;
-    void editorLayerDraw(void);
+    void editorLayerDraw(runtime::Scene &s);
     void editorLayerDrawMenubar(void);
     void editorLayerDrawScene(void);
-    void editorLayerDrawHierarchy(void);
-    void editorLayerDrawInspector(void);
+    void editorLayerDrawHierarchy(runtime::Scene &s);
+    void editorLayerDrawInspector(runtime::Scene &s);
     void editorLayerDrawStats(void);
   public:
     RenderSystem(const RenderSystemSpec &spec);

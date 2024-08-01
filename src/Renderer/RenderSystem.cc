@@ -15,13 +15,13 @@ namespace volt::renderer {
     imgui_io.ConfigWindowsMoveFromTitleBarOnly = true;
   }
 
-  void RenderSystem::editorLayerDraw(void) {
+  void RenderSystem::editorLayerDraw(runtime::Scene &s) {
     rlImGuiBegin();
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
     editorLayerDrawMenubar();
     editorLayerDrawScene();
-    editorLayerDrawHierarchy();
-    editorLayerDrawInspector();
+    editorLayerDrawHierarchy(s);
+    editorLayerDrawInspector(s);
     rlImGuiEnd();
     editorLayerDrawStats();
   }
@@ -45,14 +45,16 @@ namespace volt::renderer {
     ImGui::PopStyleVar();
   }
 
-  void RenderSystem::editorLayerDrawHierarchy(void) {
+  void RenderSystem::editorLayerDrawHierarchy(runtime::Scene &s) {
     if (ImGui::Begin("Hierarchy")) {
-      // ...
+      s.ForAll<runtime::TagComponent>([]([[maybe_unused]] auto e, auto &t) {
+        ImGui::Text("-> %s", t.tag.c_str());
+      });
     }
     ImGui::End();
   }
 
-  void RenderSystem::editorLayerDrawInspector(void) {
+  void RenderSystem::editorLayerDrawInspector(runtime::Scene &) {
     if (ImGui::Begin("Inspector")) {
       // ...
     }
@@ -87,7 +89,7 @@ namespace volt::renderer {
     });
     if (IsEditor()) {
       EndTextureMode();
-      editorLayerDraw();
+      editorLayerDraw(s);
     }
     m_window.Update();
   }
