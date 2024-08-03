@@ -12,5 +12,6 @@ namespace volt::runtime {
     SceneSerializer &operator=(const SceneSerializer &) = delete;
     SceneSerializer &operator=(SceneSerializer &&) = delete;
     void Serialize(const std::filesystem::path &path);
+    bool Deserialize(const std::filesystem::path &path);
   };
 }

@@ -6,6 +6,7 @@ namespace volt::core {
   struct SnowflakeID {
     using value_type = uint64_t;
     SnowflakeID(void);
+    SnowflakeID(value_type id);
     inline operator value_type(void) const noexcept { return m_id; }
   private:
     value_type m_id;

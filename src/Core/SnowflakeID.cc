@@ -16,4 +16,6 @@ namespace volt::core {
   {
     m_id = (m_timestamp << rand_num_bits) | m_random;
   }
+
+  SnowflakeID::SnowflakeID(value_type id) : m_id{id} {}
 }
