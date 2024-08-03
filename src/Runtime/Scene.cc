@@ -25,7 +25,7 @@ namespace volt::runtime {
     m_registry.destroy(e);
   }
 
-  std::optional<Entity> Scene::FindEntityByID(const core::SnowflakeID &id) {
+  std::optional<Entity> Scene::FindEntityByID(core::SnowflakeID::value_type id) {
     if (m_ids.find(id) != m_ids.end()) return Entity{ m_ids.at(id), this };
     return {};
   }

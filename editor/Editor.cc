@@ -16,8 +16,9 @@ struct Editor : public volt::app::IAppBackend {
     };
   }
 
-  void Start(volt::runtime::Scene &) final {
-    // ...
+  void Start(volt::runtime::Scene &s) final {
+    s.CreateEntity("entity1");
+    s.CreateEntity("entity2");
   }
 
   void Update(volt::runtime::Scene &) final {

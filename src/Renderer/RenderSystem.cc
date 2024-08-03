@@ -4,6 +4,9 @@
 #include "RenderSystem.hh"
 #include "RenderComponent.hh"
 #include "../Core/LogSystem.hh"
+#include "../Runtime/TransformComponent.hh"
+
+static volt::core::SnowflakeID::value_type s_selectedEntityID {0};
 
 namespace volt::renderer {
   void RenderSystem::editorLayerSetup(void) const {
@@ -18,10 +21,12 @@ namespace volt::renderer {
   void RenderSystem::editorLayerDraw(runtime::Scene &s) {
     rlImGuiBegin();
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
+    ImGui::ShowDemoWindow();  // TEMPORARY DEMO
     editorLayerDrawMenubar();
     editorLayerDrawScene();
     editorLayerDrawHierarchy(s);
     editorLayerDrawInspector(s);
+    editorLayerDrawProject();
     rlImGuiEnd();
     editorLayerDrawStats();
   }
@@ -47,15 +52,29 @@ namespace volt::renderer {
 
   void RenderSystem::editorLayerDrawHierarchy(runtime::Scene &s) {
     if (ImGui::Begin("Hierarchy")) {
-      s.ForAll<runtime::TagComponent>([]([[maybe_unused]] auto e, auto &t) {
-        ImGui::Text("-> %s", t.tag.c_str());
+      s.ForAll<runtime::TagComponent>([](auto e, auto &t) {
+        if (ImGui::Selectable(t.tag.c_str(), s_selectedEntityID == e.GetID())) {
+          s_selectedEntityID = e.GetID();
+        }
       });
     }
     ImGui::End();
   }
 
-  void RenderSystem::editorLayerDrawInspector(runtime::Scene &) {
+  void RenderSystem::editorLayerDrawInspector(runtime::Scene &s) {
     if (ImGui::Begin("Inspector")) {
+      auto e { s.FindEntityByID(s_selectedEntityID) };
+      if (e) {
+        if (e->HasComponent<runtime::TransformComponent>()) {
+          e->GetComponent<runtime::TransformComponent>().DrawDetails();
+        }
+      }
+    }
+    ImGui::End();
+  }
+
+  void RenderSystem::editorLayerDrawProject(void) {
+    if (ImGui::Begin("Project")) {
       // ...
     }
     ImGui::End();

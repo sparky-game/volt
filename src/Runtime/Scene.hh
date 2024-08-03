@@ -49,7 +49,7 @@ namespace volt::runtime {
         callback(Entity{ e, this }, view.template get<Comps>(e)...);
       }
     }
-    std::optional<Entity> FindEntityByID(const core::SnowflakeID &id);
+    std::optional<Entity> FindEntityByID(core::SnowflakeID::value_type id);
     std::optional<Entity> FindEntityByName(const std::string &name);
   };
 

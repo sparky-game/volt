@@ -16,6 +16,7 @@ namespace volt::renderer {
     void editorLayerDrawScene(void);
     void editorLayerDrawHierarchy(runtime::Scene &s);
     void editorLayerDrawInspector(runtime::Scene &s);
+    void editorLayerDrawProject(void);
     void editorLayerDrawStats(void);
   public:
     RenderSystem(const RenderSystemSpec &spec);
