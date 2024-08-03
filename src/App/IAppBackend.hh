@@ -6,5 +6,6 @@ namespace volt::app {
     virtual AppSpec Init(void) = 0;
     virtual void Start(runtime::Scene &s) = 0;
     virtual void Update(runtime::Scene &s) = 0;
+    virtual void Stop(runtime::Scene &s) = 0;
   };
 }

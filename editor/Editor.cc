@@ -24,6 +24,11 @@ struct Editor : public volt::app::IAppBackend {
   void Update(volt::runtime::Scene &) final {
     // ...
   }
+
+  void Stop(volt::runtime::Scene &s) final {
+    volt::runtime::SceneSerializer ss { &s };
+    ss.Serialize("scene.vsc");
+  }
 };
 
 volt::app::IAppBackend *CreateVoltApp(void) { return new Editor; }

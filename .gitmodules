@@ -13,3 +13,6 @@
 [submodule "vendor/imgui_impl_raylib"]
 	path = vendor/imgui_impl_raylib
 	url = https://github.com/raylib-extras/rlImGui
+[submodule "vendor/yaml-cpp"]
+	path = vendor/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp

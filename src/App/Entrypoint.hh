@@ -22,6 +22,8 @@
 #include "AppSpec.hh"
 #include "IAppBackend.hh"
 
+#include "../Runtime/SceneSerializer.hh"
+
 extern volt::app::IAppBackend *CreateVoltApp(void);
 
 int main(void) {
@@ -50,5 +52,6 @@ int main(void) {
     renderer.WaitIdle(t);
   }
 
+  app->Stop(scene);
   delete app;
 }
