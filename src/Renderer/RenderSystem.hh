@@ -1,23 +1,15 @@
 #pragma once
 
 #include "Window.hh"
-#include "../Runtime/Scene.hh"
+#include "EditorLayer.hh"
 #include "../Core/Timepoint.hh"
 
 namespace volt::renderer {
   class RenderSystem {
     RenderSystemSpec m_spec;
     Window m_window;
+    std::optional<EditorLayer> m_editorLayer;
     int64_t m_minFrameTime;
-    bool m_closeRequested;
-    void editorLayerSetup(void) const;
-    void editorLayerDraw(runtime::Scene &s);
-    void editorLayerDrawMenubar(void);
-    void editorLayerDrawScene(void);
-    void editorLayerDrawHierarchy(runtime::Scene &s);
-    void editorLayerDrawInspector(runtime::Scene &s);
-    void editorLayerDrawProject(void);
-    void editorLayerDrawStats(void);
   public:
     RenderSystem(const RenderSystemSpec &spec);
     RenderSystem(const RenderSystem &) = delete;
