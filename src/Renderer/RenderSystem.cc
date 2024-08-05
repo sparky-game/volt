@@ -24,7 +24,7 @@ namespace volt::renderer {
       // NOTE: to visually distinguish actual scene viewport
       ClearBackground(GetColor(0x333333FF));
     }
-    s.ForAll<RenderComponent>([this]([[maybe_unused]] auto e, auto &r) {
+    s.ForAll<RenderComponent>([this](auto, auto &r) {
       m_window.Draw(r.sprite, r.position_x, r.position_y);
     });
     if (IsEditor()) {

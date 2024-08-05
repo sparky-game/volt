@@ -8,6 +8,7 @@ namespace volt::renderer {
     bool m_closeRequested { false };
     core::SnowflakeID::value_type m_selectedEntityID {0};
     void drawMenubar(void) noexcept;
+    void drawControls(runtime::Scene &s) noexcept;
     void drawScene(Window &w) const noexcept;
     void drawHierarchy(runtime::Scene &s) noexcept;
     void drawInspector(runtime::Scene &s) const noexcept;

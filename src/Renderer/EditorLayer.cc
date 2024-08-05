@@ -15,6 +15,24 @@ namespace volt::renderer {
     }
   }
 
+  void EditorLayer::drawControls(runtime::Scene &s) noexcept {
+    if (ImGui::Begin("Controls", nullptr, ImGuiWindowFlags_NoTitleBar)) {
+      if (s.IsRunning()) {
+        if (ImGui::Button("Pause")) {
+          s.Pause();
+        }
+      }
+      else if (ImGui::Button("Play")) {
+        s.Play();
+      }
+      ImGui::SameLine();
+      if (ImGui::Button("Stop")) {
+        s.Stop();
+      }
+    }
+    ImGui::End();
+  }
+
   void EditorLayer::drawScene(Window &w) const noexcept {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     if (ImGui::Begin("Scene")) {
@@ -75,6 +93,7 @@ namespace volt::renderer {
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
     ImGui::ShowDemoWindow();  // TEMPORARY DEMO
     drawMenubar();
+    drawControls(s);
     drawScene(w);
     drawHierarchy(s);
     drawInspector(s);
