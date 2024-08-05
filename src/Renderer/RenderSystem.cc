@@ -21,7 +21,8 @@ namespace volt::renderer {
   void RenderSystem::Update(runtime::Scene &s) {
     if (IsEditor()) {
       BeginTextureMode(*m_window.GetEditorViewportFBO());
-      ClearBackground(DARKGRAY);
+      // NOTE: to visually distinguish actual scene viewport
+      ClearBackground(GetColor(0x333333FF));
     }
     s.ForAll<RenderComponent>([this]([[maybe_unused]] auto e, auto &r) {
       m_window.Draw(r.sprite, r.position_x, r.position_y);

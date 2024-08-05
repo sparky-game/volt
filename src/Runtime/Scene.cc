@@ -6,6 +6,10 @@ namespace volt::runtime {
     : m_id{id}, m_scene{scene}
   {}
 
+  Scene::Scene(void)
+    : m_running{false}
+  {}
+
   Entity Scene::CreateEntity(const std::string &name) {
     return CreateEntity(core::SnowflakeID(), name);
   }
@@ -37,5 +41,18 @@ namespace volt::runtime {
       if (t.tag == name) return Entity{ e, this };
     }
     return {};
+  }
+
+  void Scene::Play(void) noexcept {
+    if (not m_running) m_running = true;
+  }
+
+  void Scene::Pause(void) noexcept {
+    if (m_running) m_running = false;
+  }
+
+  void Scene::Stop(void) noexcept {
+    Pause();
+    // TODO: figure out how to reset/rewind the scene
   }
 }

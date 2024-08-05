@@ -23,10 +23,6 @@ struct Editor : public volt::app::IAppBackend {
     s.CreateEntity("entity2");
   }
 
-  void Update(volt::runtime::Scene &) final {
-    // ...
-  }
-
   void Stop(volt::runtime::Scene &s) final {
     volt::runtime::SceneSerializer ss { &s };
     ss.Serialize("scene.vsc");

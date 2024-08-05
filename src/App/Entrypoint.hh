@@ -40,14 +40,16 @@ int main(void) {
 
   volt::runtime::Scene scene;
   app->Start(scene);
+  if (not renderer.IsEditor()) scene.Play();
 
   while (renderer.IsRunning()) {
     auto t { volt::core::GetTimepoint() };
-    input.Update(scene);
-    behaviour.Update(scene);
-    physics.Update(scene);
+    if (scene.IsRunning()) {
+      input.Update(scene);
+      behaviour.Update(scene);
+      physics.Update(scene);
+    }
     pre_renderer.Update(scene);
-    app->Update(scene);
     renderer.Update(scene);
     renderer.WaitIdle(t);
   }

@@ -31,10 +31,11 @@ namespace volt::runtime {
 
   class Scene {
     friend class Entity;
+    bool m_running;
     ECS_t m_registry;
     std::unordered_map<core::SnowflakeID::value_type, EID> m_ids;
   public:
-    Scene(void) = default;
+    Scene(void);
     Scene(const Scene &) = delete;
     Scene(Scene &&) = delete;
     Scene &operator=(const Scene &) = delete;
@@ -51,6 +52,10 @@ namespace volt::runtime {
     }
     std::optional<Entity> FindEntityByID(core::SnowflakeID::value_type id);
     std::optional<Entity> FindEntityByName(const std::string &name);
+    inline bool IsRunning(void) const noexcept { return m_running; }
+    void Play(void) noexcept;
+    void Pause(void) noexcept;
+    void Stop(void) noexcept;
   };
 
   template <typename T>
