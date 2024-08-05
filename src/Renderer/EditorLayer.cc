@@ -43,10 +43,48 @@ namespace volt::renderer {
   }
 
   void EditorLayer::drawHierarchy(runtime::Scene &s) noexcept {
+    static std::array<char, 32> entity_name { "Entity" };
     if (ImGui::Begin("Hierarchy")) {
-      s.ForAll<runtime::TagComponent>([this](auto e, auto &t) {
+      if (ImGui::BeginPopupContextWindow()) {
+        if (ImGui::Button("New entity ...")) {
+          ImGui::OpenPopup("new_entity_ctx_menu");
+        }
+        if (ImGui::BeginPopup("new_entity_ctx_menu")) {
+          ImGui::Text("Tag");
+          ImGui::InputText("##new_entity", entity_name.data(), entity_name.size());
+          if (not entity_name.empty() and ImGui::Button("Create")) {
+            s.CreateEntity(std::string(entity_name.data()));
+            ImGui::CloseCurrentPopup();
+          }
+          ImGui::EndPopup();
+        }
+        ImGui::EndPopup();
+      }
+      s.ForAll<runtime::TagComponent>([&](auto e, auto &t) {
         if (ImGui::Selectable(t.tag.c_str(), m_selectedEntityID == e.GetID())) {
           m_selectedEntityID = e.GetID();
+        }
+        if (ImGui::BeginPopupContextItem()) {
+          if (ImGui::Button("Delete")) {
+            s.DestroyEntity(e);
+          }
+          if (ImGui::Button("Rename ...")) {
+            ImGui::OpenPopup("rename_entity_ctx_menu");
+          }
+          if (ImGui::BeginPopup("rename_entity_ctx_menu")) {
+            ImGui::Text("Tag");
+            auto &t { e.template GetComponent<runtime::TagComponent>() };
+            size_t len_to_cp { std::min(t.tag.size(), entity_name.max_size() - 1) };
+            std::copy_n(t.tag.begin(), len_to_cp, entity_name.begin());
+            entity_name[len_to_cp] = 0;
+            ImGui::InputText("##rename_entity", entity_name.data(), entity_name.size());
+            if (not entity_name.empty() and ImGui::Button("Rename")) {
+              t.tag = std::string(entity_name.data());
+              ImGui::CloseCurrentPopup();
+            }
+            ImGui::EndPopup();
+          }
+          ImGui::EndPopup();
         }
       });
     }
