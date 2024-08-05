@@ -18,9 +18,7 @@ struct Editor : public volt::app::IAppBackend {
 
   void Start(volt::runtime::Scene &s) final {
     volt::runtime::SceneSerializer ss { &s };
-    if (ss.Deserialize("scene.vsc")) return;
-    s.CreateEntity("entity1");
-    s.CreateEntity("entity2");
+    ss.Deserialize("scene.vsc");
   }
 
   void Stop(volt::runtime::Scene &s) final {
