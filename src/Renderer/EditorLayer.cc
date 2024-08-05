@@ -73,13 +73,9 @@ namespace volt::renderer {
           }
           if (ImGui::BeginPopup("rename_entity_ctx_menu")) {
             ImGui::Text("Tag");
-            auto &t { e.template GetComponent<runtime::TagComponent>() };
-            size_t len_to_cp { std::min(t.tag.size(), entity_name.max_size() - 1) };
-            std::copy_n(t.tag.begin(), len_to_cp, entity_name.begin());
-            entity_name[len_to_cp] = 0;
             ImGui::InputText("##rename_entity", entity_name.data(), entity_name.size());
             if (not entity_name.empty() and ImGui::Button("Rename")) {
-              t.tag = std::string(entity_name.data());
+              e.template GetComponent<runtime::TagComponent>().tag = std::string(entity_name.data());
               ImGui::CloseCurrentPopup();
             }
             ImGui::EndPopup();
