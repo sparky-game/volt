@@ -11,4 +11,4 @@ contact:
     email: wasymatieh01@gmail.com
 abstract: "A multithreaded, high performance, fully functional game engine written in C++."
 # license: (...)
-repository-code: "https://github.com/sparky-game/carbon"
+repository-code: "https://github.com/sparky-game/volt"
