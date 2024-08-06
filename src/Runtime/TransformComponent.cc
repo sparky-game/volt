@@ -1,4 +1,6 @@
+#include <format>
 #include <imgui.h>
+#include <yaml-cpp/yaml.h>
 #include "TransformComponent.hh"
 
 namespace volt::runtime {
@@ -9,6 +11,12 @@ namespace volt::runtime {
   TransformComponent::TransformComponent(float pos_x, float pos_y)
     : position_x{pos_x}, position_y{pos_y}
   {}
+
+  void TransformComponent::Serialize(YAML::Emitter &out) {
+    out << YAML::Key << TransformComponent::cmp_name << YAML::BeginMap;
+    out << YAML::Key << "Position" << YAML::Value << std::format("({:.3f}, {:.3f})", position_x, position_y);
+    out << YAML::EndMap;
+  }
 
   void TransformComponent::DrawDetails(void) {
     if (ImGui::CollapsingHeader(TransformComponent::cmp_name)) {

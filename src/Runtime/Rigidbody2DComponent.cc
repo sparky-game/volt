@@ -1,4 +1,6 @@
+#include <format>
 #include <imgui.h>
+#include <yaml-cpp/yaml.h>
 #include "Rigidbody2DComponent.hh"
 
 namespace volt::runtime {
@@ -9,6 +11,12 @@ namespace volt::runtime {
   Rigidbody2DComponent::Rigidbody2DComponent(float vel_x, float vel_y)
     : velocity_x{vel_x}, velocity_y{vel_y}
   {}
+
+  void Rigidbody2DComponent::Serialize(YAML::Emitter &out) {
+    out << YAML::Key << Rigidbody2DComponent::cmp_name << YAML::BeginMap;
+    out << YAML::Key << "Velocity" << YAML::Value << std::format("({:.3f}, {:.3f})", velocity_x, velocity_y);
+    out << YAML::EndMap;
+  }
 
   void Rigidbody2DComponent::DrawDetails(void) {
     if (ImGui::CollapsingHeader(Rigidbody2DComponent::cmp_name)) {

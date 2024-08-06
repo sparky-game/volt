@@ -1,4 +1,3 @@
-#include <format>
 #include <fstream>
 #include "Scene.hh"
 #include <filesystem>
@@ -14,16 +13,10 @@ namespace volt::runtime {
     out << YAML::Key << "ID"  << YAML::Value << e.GetID();
     out << YAML::Key << "Tag" << YAML::Value << e.GetName();
     if (e.HasComponent<TransformComponent>()) {
-      auto &t { e.GetComponent<TransformComponent>() };
-      out << YAML::Key << TransformComponent::cmp_name << YAML::BeginMap;
-      out << YAML::Key << "Position" << YAML::Value << std::format("({:.3f}, {:.3f})", t.position_x, t.position_y);
-      out << YAML::EndMap;
+      e.GetComponent<TransformComponent>().Serialize(out);
     }
     if (e.HasComponent<Rigidbody2DComponent>()) {
-      auto &rb { e.GetComponent<Rigidbody2DComponent>() };
-      out << YAML::Key << Rigidbody2DComponent::cmp_name << YAML::BeginMap;
-      out << YAML::Key << "Velocity" << YAML::Value << std::format("({:.3f}, {:.3f})", rb.velocity_x, rb.velocity_y);
-      out << YAML::EndMap;
+      e.GetComponent<Rigidbody2DComponent>().Serialize(out);
     }
     out << YAML::EndMap;
   }
