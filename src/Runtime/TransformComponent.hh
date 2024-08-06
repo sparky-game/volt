@@ -2,9 +2,10 @@
 
 namespace volt::runtime {
   struct TransformComponent {
+    static inline auto cmp_name { "Transform" };
     // Vector2<float> position;
-    float position_x {0}, position_y {0};
-    TransformComponent(void) = default;
+    float position_x, position_y;
+    TransformComponent(void);
     TransformComponent(float pos_x, float pos_y);
     void DrawDetails(void);
   };

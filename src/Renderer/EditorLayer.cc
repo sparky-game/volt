@@ -2,13 +2,15 @@
 #include <rlImGui.h>
 #include "Window.hh"
 #include "EditorLayer.hh"
+#include "SpriteRendererComponent.hh"
 #include "../Runtime/TransformComponent.hh"
+#include "../Runtime/Rigidbody2DComponent.hh"
 
 namespace volt::renderer {
   void EditorLayer::drawMenubar(void) noexcept {
     if (ImGui::BeginMainMenuBar()) {
       if (ImGui::BeginMenu("File")) {
-        if (ImGui::MenuItem("Exit")) m_closeRequested = true;
+        if (ImGui::MenuItem("Exit", "Ctrl+Q")) m_closeRequested = true;
         ImGui::EndMenu();
       }
       ImGui::EndMainMenuBar();
@@ -93,6 +95,22 @@ namespace volt::renderer {
       if (e) {
         if (e->HasComponent<runtime::TransformComponent>()) {
           e->GetComponent<runtime::TransformComponent>().DrawDetails();
+        }
+        if (e->HasComponent<runtime::Rigidbody2DComponent>()) {
+          e->GetComponent<runtime::Rigidbody2DComponent>().DrawDetails();
+        }
+        if (e->HasComponent<SpriteRendererComponent>()) {
+          e->GetComponent<SpriteRendererComponent>().DrawDetails();
+        }
+        if (ImGui::Button("Add component")) {
+          ImGui::OpenPopup("add_cmp_ctx_menu");
+        }
+        if (ImGui::BeginPopup("add_cmp_ctx_menu")) {
+          ImGui::SeparatorText("Search");
+          if (not e->HasComponent<runtime::Rigidbody2DComponent>() and ImGui::Selectable(runtime::Rigidbody2DComponent::cmp_name)) {
+            e->AddComponent<runtime::Rigidbody2DComponent>();
+          }
+          ImGui::EndPopup();
         }
       }
     }

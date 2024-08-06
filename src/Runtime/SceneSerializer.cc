@@ -6,6 +6,7 @@
 #include "SceneSerializer.hh"
 #include "../Core/LogSystem.hh"
 #include "TransformComponent.hh"
+#include "Rigidbody2DComponent.hh"
 
 namespace volt::runtime {
   static inline void SerializeEntity(YAML::Emitter &out, Entity &e) {
@@ -14,8 +15,14 @@ namespace volt::runtime {
     out << YAML::Key << "Tag" << YAML::Value << e.GetName();
     if (e.HasComponent<TransformComponent>()) {
       auto &t { e.GetComponent<TransformComponent>() };
-      out << YAML::Key << "Transform" << YAML::BeginMap;
+      out << YAML::Key << TransformComponent::cmp_name << YAML::BeginMap;
       out << YAML::Key << "Position" << YAML::Value << std::format("({:.3f}, {:.3f})", t.position_x, t.position_y);
+      out << YAML::EndMap;
+    }
+    if (e.HasComponent<Rigidbody2DComponent>()) {
+      auto &rb { e.GetComponent<Rigidbody2DComponent>() };
+      out << YAML::Key << Rigidbody2DComponent::cmp_name << YAML::BeginMap;
+      out << YAML::Key << "Velocity" << YAML::Value << std::format("({:.3f}, {:.3f})", rb.velocity_x, rb.velocity_y);
       out << YAML::EndMap;
     }
     out << YAML::EndMap;
@@ -25,18 +32,29 @@ namespace volt::runtime {
     auto id { e["ID"].template as<core::SnowflakeID::value_type>() };
     auto tag { e["Tag"].template as<std::string>() };
     auto e_deserialized { s->CreateEntity(core::SnowflakeID(id), tag) };
-    auto transform { e["Transform"] };
+    auto transform { e[TransformComponent::cmp_name] };
     if (transform) {
       auto transform_position_str { transform["Position"].template as<std::string>() };
       float transform_position_x {0}, transform_position_y {0};
       if (2 != std::sscanf(transform_position_str.c_str(), "(%f, %f)", &transform_position_x, &transform_position_y)) {
-        VOLT_LOG_ERROR("volt::runtime::SceneSerializer({})::Deserialize('{}') :: `Transform.Position` value format not valid",
-                       fmt::ptr(s), std::string(path));
+        VOLT_LOG_ERROR("volt::runtime::SceneSerializer({})::Deserialize('{}') :: `{}.Position` value format not valid",
+                       fmt::ptr(s), std::string(path), TransformComponent::cmp_name);
         return false;
       }
       auto &transform_cmp { e_deserialized.template GetComponent<TransformComponent>() };
       transform_cmp.position_x = transform_position_x;
       transform_cmp.position_y = transform_position_y;
+    }
+    auto rigidbody2d { e[Rigidbody2DComponent::cmp_name] };
+    if (rigidbody2d) {
+      auto rigidbody2d_velocity_str { rigidbody2d["Velocity"].template as<std::string>() };
+      float rigidbody2d_velocity_x {0}, rigidbody2d_velocity_y {0};
+      if (2 != std::sscanf(rigidbody2d_velocity_str.c_str(), "(%f, %f)", &rigidbody2d_velocity_x, &rigidbody2d_velocity_y)) {
+        VOLT_LOG_ERROR("volt::runtime::SceneSerializer({})::Deserialize('{}') :: `{}.Velocity` value format not valid",
+                       fmt::ptr(s), std::string(path), Rigidbody2DComponent::cmp_name);
+        return false;
+      }
+      e_deserialized.template AddComponent<Rigidbody2DComponent>(rigidbody2d_velocity_x, rigidbody2d_velocity_y);
     }
     return true;
   }

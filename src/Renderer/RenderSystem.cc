@@ -1,7 +1,7 @@
 #include "Window.hh"
 #include "RenderSystem.hh"
-#include "RenderComponent.hh"
 #include "../Core/LogSystem.hh"
+#include "SpriteRendererComponent.hh"
 
 namespace volt::renderer {
   RenderSystem::RenderSystem(const RenderSystemSpec &spec)
@@ -24,7 +24,7 @@ namespace volt::renderer {
       // NOTE: to visually distinguish actual scene viewport
       ClearBackground(GetColor(0x333333FF));
     }
-    s.ForAll<RenderComponent>([this](auto, auto &r) {
+    s.ForAll<SpriteRendererComponent>([this](auto, auto &r) {
       m_window.Draw(r.sprite, r.position_x, r.position_y);
     });
     if (IsEditor()) {
