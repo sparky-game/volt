@@ -1,6 +1,7 @@
 #include <format>
 #include <imgui.h>
 #include <yaml-cpp/yaml.h>
+#include "../Core/LogSystem.hh"
 #include "TransformComponent.hh"
 
 namespace volt::runtime {
@@ -16,6 +17,19 @@ namespace volt::runtime {
     out << YAML::Key << TransformComponent::cmp_name << YAML::BeginMap;
     out << YAML::Key << "Position" << YAML::Value << std::format("({:.3f}, {:.3f})", position_x, position_y);
     out << YAML::EndMap;
+  }
+
+  bool TransformComponent::Deserialize(YAML::Node &in) {
+    auto position_serialized { in["Position"].template as<std::string>() };
+    float position_tmp_x {0}, position_tmp_y {0};
+    if (2 != std::sscanf(position_serialized.c_str(), "(%f, %f)", &position_tmp_x, &position_tmp_y)) {
+      VOLT_LOG_ERROR("volt::runtime::TransformComponent::Deserialize :: `{}.Position` value format not valid",
+                     TransformComponent::cmp_name);
+      return false;
+    }
+    position_x = position_tmp_x;
+    position_y = position_tmp_y;
+    return true;
   }
 
   void TransformComponent::DrawDetails(void) {

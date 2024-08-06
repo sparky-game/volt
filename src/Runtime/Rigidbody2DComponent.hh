@@ -2,6 +2,7 @@
 
 namespace YAML {
   class Emitter;
+  class Node;
 }
 
 namespace volt::runtime {
@@ -12,6 +13,7 @@ namespace volt::runtime {
     Rigidbody2DComponent(void);
     Rigidbody2DComponent(float vel_x, float vel_y);
     void Serialize(YAML::Emitter &out);
+    bool Deserialize(YAML::Node &in);
     void DrawDetails(void);
   };
 }

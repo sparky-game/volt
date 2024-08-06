@@ -6,7 +6,7 @@ namespace volt::runtime {
   class SceneSerializer {
     Scene *m_scene;
   public:
-    SceneSerializer(Scene *scene);
+    SceneSerializer(Scene *s);
     SceneSerializer(const SceneSerializer &) = delete;
     SceneSerializer(SceneSerializer &&) = delete;
     SceneSerializer &operator=(const SceneSerializer &) = delete;
