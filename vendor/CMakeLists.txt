@@ -17,11 +17,3 @@ target_include_directories(raylib SYSTEM PUBLIC raylib/src/external/glfw/include
 
 target_compile_options(raylib PRIVATE "-w")
 target_compile_options(raylib PRIVATE "-Wno-implicit-function-declaration")
-target_compile_options(imgui PRIVATE "-pipe")
-target_compile_options(raylib PRIVATE "-pipe")
-target_compile_options(yaml_cpp PRIVATE "-pipe")
-target_compile_options(imgui_impl_raylib PRIVATE "-pipe")
-target_compile_options(imgui PRIVATE "-O3")
-target_compile_options(raylib PRIVATE "-O3")
-target_compile_options(yaml_cpp PRIVATE "-O3")
-target_compile_options(imgui_impl_raylib PRIVATE "-O3")
