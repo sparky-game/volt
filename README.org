@@ -41,7 +41,11 @@ Write games, don't play them
 - [[#usage][Usage]]
 - [[#build-from-source][Build from source]]
   - [[#get-the-code][Get the code]]
-  - [[#compilation--linkage][Compilation & Linkage]]
+  - [[#configuration][Configuration]]
+    - [[#debug][Debug]]
+    - [[#release][Release]]
+    - [[#dist][Dist]]
+  - [[#compilation-and-linkage][Compilation and linkage]]
 
 * Usage
 
@@ -61,18 +65,40 @@ To clone the official repo as well as all its submodules, issue the following co
 git clone --recurse-submodules https://github.com/sparky-game/volt
 #+end_src
 
-** Compilation & Linkage
+** Configuration
+
+(...)
+
+*** Debug
 
 (...)
 
 #+begin_src sh
-cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake -B build.debug.d -DCMAKE_BUILD_TYPE=Debug
 #+end_src
 
+*** Release
+
 (...)
 
 #+begin_src sh
-cmake --build build
+cmake -B build.release.d
+#+end_src
+
+*** Dist
+
+(...)
+
+#+begin_src sh
+cmake -B build.dist.d -DCMAKE_BUILD_TYPE=Dist
+#+end_src
+
+** Compilation and linkage
+
+(...)
+
+#+begin_src sh
+cmake --build $BUILD_DIR
 #+end_src
 
 (...)
