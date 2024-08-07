@@ -1,5 +1,5 @@
 function (volt_set_cxx_compiler)
-  if (WIN32 OR DEFINED CMAKE_CXX_COMPILER)
+  if (WIN32 OR CMAKE_CXX_COMPILER)
     return()
   endif()
   find_program(VOLT_CXX_COMPILER clang++)

@@ -7,6 +7,11 @@ target_compile_definitions(${CMAKE_PROJECT_NAME}-editor PRIVATE VOLT_VERSION=${C
 
 target_include_directories(${CMAKE_PROJECT_NAME}-editor PUBLIC ..)
 
+target_compile_options(${CMAKE_PROJECT_NAME}-editor PRIVATE "-Wall")
+target_compile_options(${CMAKE_PROJECT_NAME}-editor PRIVATE "-Wextra")
+target_compile_options(${CMAKE_PROJECT_NAME}-editor PRIVATE "-Wpedantic")
+target_compile_options(${CMAKE_PROJECT_NAME}-editor PRIVATE "-Werror")
+
 target_link_options(${CMAKE_PROJECT_NAME}-editor PRIVATE "-static-libgcc")
 target_link_options(${CMAKE_PROJECT_NAME}-editor PRIVATE "-static-libstdc++")
 target_link_libraries(${CMAKE_PROJECT_NAME}-editor ${CMAKE_PROJECT_NAME})

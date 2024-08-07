@@ -16,3 +16,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} SYSTEM PUBLIC ../vendor/raylib/
 target_include_directories(${CMAKE_PROJECT_NAME} SYSTEM PUBLIC ../vendor/spdlog/include)
 target_include_directories(${CMAKE_PROJECT_NAME} SYSTEM PUBLIC ../vendor/yaml-cpp/include)
 target_include_directories(${CMAKE_PROJECT_NAME} SYSTEM PUBLIC ../vendor/imgui_impl_raylib)
+
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE "-Wall")
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE "-Wextra")
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE "-Wpedantic")
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE "-Werror")

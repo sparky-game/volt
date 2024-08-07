@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.20)
 include(cmake/build_type.cmake)
 include(cmake/c_compiler.cmake)
 include(cmake/cxx_compiler.cmake)
+include(cmake/c_compiler_options.cmake)
+include(cmake/cxx_compiler_options.cmake)
 
 volt_set_build_type()
 volt_set_c_compiler()
@@ -15,21 +17,8 @@ project(
 )
 set(CMAKE_PROJECT_VERSION 0.1-alpha)
 
-set(CMAKE_C_STANDARD 17)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_C_EXTENSIONS ON)
-set(CMAKE_C_FLAGS "-Wall -Wextra -Wpedantic -Werror")
-set(CMAKE_C_FLAGS_DEBUG "-fsanitize=address,undefined -g -Og")
-set(CMAKE_C_FLAGS_RELEASE "-pipe -O3")
-
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Werror")
-set(CMAKE_CXX_FLAGS_DEBUG "-fsanitize=address,undefined -g -Og")
-set(CMAKE_CXX_FLAGS_RELEASE "-pipe -O3")
-
-message(STATUS "The configured build type is ${CMAKE_BUILD_TYPE}")
+volt_set_c_compiler_options()
+volt_set_cxx_compiler_options()
 
 add_subdirectory(vendor)
 add_subdirectory(editor)
