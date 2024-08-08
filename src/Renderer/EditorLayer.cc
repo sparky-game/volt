@@ -125,10 +125,11 @@ namespace volt::renderer {
   }
 
   void EditorLayer::drawStats(void) const noexcept {
-    DrawText(TextFormat("FPS: %u (%.1f ms)", GetFPS(), GetFrameTime() * 1000),
-             GetScreenWidth() - 190,
-             GetScreenHeight() - 40,
-             14, LIGHTGRAY);
+    if (ImGui::Begin("Stats")) {
+      ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+      ImGui::Text("Frametime: %.3f ms", 1e3 / ImGui::GetIO().Framerate);
+    }
+    ImGui::End();
   }
 
   void EditorLayer::Setup(void) const noexcept {
@@ -150,7 +151,7 @@ namespace volt::renderer {
     drawHierarchy(s);
     drawInspector(s);
     drawProject();
-    rlImGuiEnd();
     drawStats();
+    rlImGuiEnd();
   }
 }
