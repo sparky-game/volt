@@ -38,6 +38,7 @@ Write games, don't play them
 (...)
 
 * Table of Contents :toc:
+- [[#documentation][Documentation]]
 - [[#usage][Usage]]
 - [[#build-from-source][Build from source]]
   - [[#get-the-code][Get the code]]
@@ -46,6 +47,14 @@ Write games, don't play them
     - [[#release][Release]]
     - [[#dist][Dist]]
   - [[#compilation-and-linkage][Compilation and linkage]]
+
+* Documentation
+
+The documentation of /Volt/ includes:
+
+- Main documentation /(Coming soon!)/
+- Reference manual /(Coming soon!)/
+- API documentation /(Coming soon!)/
 
 * Usage
 
