@@ -14,6 +14,7 @@ namespace volt::renderer {
     Texture2D m_data;
   public:
     Sprite(const std::filesystem::path &path);
+    ~Sprite(void);
     inline uint32_t width(void) const  { return m_width;  }
     inline uint32_t height(void) const { return m_height; }
     inline Texture2D data(void) const  { return m_data;   }

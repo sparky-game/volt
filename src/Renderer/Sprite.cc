@@ -9,4 +9,8 @@ namespace volt::renderer {
     m_width = m_data.width;
     m_height = m_data.height;
   }
+
+  Sprite::~Sprite(void) {
+    UnloadTexture(m_data);
+  }
 }
