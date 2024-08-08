@@ -65,6 +65,13 @@ To clone the official repo as well as all its submodules, issue the following co
 git clone --recurse-submodules https://github.com/sparky-game/volt
 #+end_src
 
+Alternatively, to update an existing clone you can issue the following commands:
+
+#+begin_src sh
+git pull
+git submodule update --init --recursive
+#+end_src
+
 ** Configuration
 
 (...)
