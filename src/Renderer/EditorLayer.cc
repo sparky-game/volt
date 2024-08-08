@@ -125,11 +125,22 @@ namespace volt::renderer {
   }
 
   void EditorLayer::drawStats(void) const noexcept {
+    static std::array<float, 100> frametime_buf;
+    static size_t i {0};
+    static float fps {0};
+    fps = ImGui::GetIO().Framerate;
+    frametime_buf[i] = 1e3 / fps;
     if (ImGui::Begin("Stats")) {
-      ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-      ImGui::Text("Frametime: %.3f ms", 1e3 / ImGui::GetIO().Framerate);
+      ImGui::PlotLines("",
+                       frametime_buf.data(),
+                       frametime_buf.size(),
+                       i,
+                       TextFormat("FPS: %.1f\nFrametime: %.3f", fps, frametime_buf[i]),
+                       frametime_buf[i] - 40, frametime_buf[i] + 40,
+                       ImVec2{0, 80});
     }
     ImGui::End();
+    i = (i + 1) % frametime_buf.max_size();
   }
 
   void EditorLayer::Setup(void) const noexcept {
