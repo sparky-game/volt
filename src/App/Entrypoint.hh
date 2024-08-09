@@ -11,23 +11,24 @@
 #include "../Runtime/BehaviourBounce.hh"
 
 // Systems
+#include "../Core/VFS.hh"
 #include "../Core/LogSystem.hh"
 #include "../Runtime/InputSystem.hh"
 #include "../Runtime/PhysicsSystem.hh"
 #include "../Renderer/RenderSystem.hh"
 #include "../Runtime/BehaviourSystem.hh"
+#include "../Runtime/SceneSerializer.hh"
 #include "../Renderer/PreRenderSystem.hh"
 
 // App
 #include "AppSpec.hh"
 #include "IAppBackend.hh"
 
-#include "../Runtime/SceneSerializer.hh"
-
 extern volt::app::IAppBackend *CreateVoltApp(void);
 
 int main(void) {
   volt::core::LogSystem::Init();
+  volt::core::VFS vfs;
 
   auto *app { CreateVoltApp() };
   auto app_spec { app->Init() };
