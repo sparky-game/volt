@@ -153,8 +153,20 @@ namespace volt::renderer {
   }
 
   void EditorLayer::Draw(runtime::Scene &s, Window &w) noexcept {
+    static bool is_first_time { true };
     rlImGuiBegin();
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
+    if (is_first_time) {
+      ImGui::OpenPopup("Welcome");
+      is_first_time = false;
+    }
+    if (ImGui::BeginPopupModal("Welcome", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+      ImGui::Text("Welcome to Volt!");
+      ImGui::Separator();
+      ImGui::Text("Please report bugs and issues to: https://github.com/sparky-game/volt/issues");
+      if (ImGui::Button("OK")) ImGui::CloseCurrentPopup();
+      ImGui::EndPopup();
+    }
     ImGui::ShowDemoWindow();  // TEMPORARY DEMO
     drawMenubar();
     drawControls(s);
