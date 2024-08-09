@@ -45,7 +45,6 @@ Write games, don't play them
   - [[#configuration][Configuration]]
     - [[#debug][Debug]]
     - [[#release][Release]]
-    - [[#dist][Dist]]
   - [[#compilation-and-linkage][Compilation and linkage]]
 
 * Documentation
@@ -99,14 +98,6 @@ cmake -B build.debug.d -DCMAKE_BUILD_TYPE=Debug
 
 #+begin_src sh
 cmake -B build.release.d
-#+end_src
-
-*** Dist
-
-(...)
-
-#+begin_src sh
-cmake -B build.dist.d -DCMAKE_BUILD_TYPE=Dist
 #+end_src
 
 ** Compilation and linkage
