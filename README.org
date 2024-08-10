@@ -19,6 +19,10 @@ Write games, don't play them
 # Repository marketing badges
 #+begin_html
 <p align="center">
+<a href="https://iwas-coder.itch.io/volt">
+<img src="https://static.itch.io/images/badge-color.svg" alt="itch.io" height=41>
+</a>
+<br/>
 <a href="https://www.buymeacoffee.com/iwas.coder">
 <img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height=41>
 </a>
