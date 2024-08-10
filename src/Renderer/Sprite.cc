@@ -3,12 +3,31 @@
 #include "../Core/LogSystem.hh"
 
 namespace volt::renderer {
+  static Image default_texture { GenImageChecked(64, 64, 32, 32, WHITE, MAROON) };
+
+  void Sprite::loadDefaultTexture(void) noexcept {
+    assert(IsImageReady(default_texture));
+    UnloadTexture(m_data);
+    m_data = LoadTextureFromImage(default_texture);
+    assert(IsTextureReady(m_data));
+    m_width = m_data.width;
+    m_height = m_data.height;
+    m_name = "default";
+  }
+
+  Sprite::Sprite(void) {
+    loadDefaultTexture();
+  }
+
   Sprite::Sprite(const std::filesystem::path &path) {
-    if (not std::filesystem::exists(path)) throw std::runtime_error { "`" + std::string(path) + "` does not represent a valid path" };
+    if (not std::filesystem::exists(path) or not std::filesystem::is_regular_file(path)) {
+      throw std::runtime_error { "`" + std::string(path) + "` does not represent a valid path" };
+    }
     m_data = LoadTexture(path.c_str());
     assert(IsTextureReady(m_data));
     m_width = m_data.width;
     m_height = m_data.height;
+    m_name = path;
   }
 
   Sprite::Sprite(Sprite &&s) noexcept
@@ -23,5 +42,25 @@ namespace volt::renderer {
 
   Sprite::~Sprite(void) {
     UnloadTexture(m_data);
+  }
+
+  void Sprite::Reset(const std::filesystem::path &path) {
+    static std::string failed_texture_name;
+    if (path == m_name) return;
+    if (not std::filesystem::exists(path) or not std::filesystem::is_regular_file(path)) {
+      if (m_name != "default") loadDefaultTexture();
+      throw std::runtime_error { "`" + std::string(path) + "` does not represent a valid path" };
+    }
+    if (path == failed_texture_name) return;
+    UnloadTexture(m_data);
+    m_data = LoadTexture(path.c_str());
+    if (not IsTextureReady(m_data)) {
+      failed_texture_name = path;
+      loadDefaultTexture();
+      return;
+    }
+    m_width = m_data.width;
+    m_height = m_data.height;
+    m_name = path;
   }
 }

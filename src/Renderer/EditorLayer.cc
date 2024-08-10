@@ -110,6 +110,9 @@ namespace volt::renderer {
           if (not e->HasComponent<runtime::Rigidbody2DComponent>() and ImGui::Selectable(runtime::Rigidbody2DComponent::cmp_name)) {
             e->AddComponent<runtime::Rigidbody2DComponent>();
           }
+          if (not e->HasComponent<SpriteRendererComponent>() and ImGui::Selectable(SpriteRendererComponent::cmp_name)) {
+            e->AddComponent<SpriteRendererComponent>(Sprite{});
+          }
           ImGui::EndPopup();
         }
       }
