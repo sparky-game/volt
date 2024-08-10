@@ -35,7 +35,7 @@ namespace volt::renderer {
   }
 
   bool RenderSystem::IsRunning(void) const {
-    if (IsEditor() && m_editorLayer->IsCloseRequested()) return false;
+    if (IsEditor() and m_editorLayer->IsCloseRequested()) return false;
     return m_window.IsOpen();
   }
 
