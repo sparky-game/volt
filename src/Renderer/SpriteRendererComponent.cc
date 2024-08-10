@@ -2,8 +2,8 @@
 #include "SpriteRendererComponent.hh"
 
 namespace volt::renderer {
-  SpriteRendererComponent::SpriteRendererComponent(const Sprite &s)
-    : sprite{s}
+  SpriteRendererComponent::SpriteRendererComponent(Sprite &&s) noexcept
+    : sprite{std::move(s)}
   {}
 
   void SpriteRendererComponent::DrawDetails(void) {

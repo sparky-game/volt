@@ -7,7 +7,7 @@ namespace volt::renderer {
     Sprite sprite;
     // Vector2<int32_t> position;
     int32_t position_x, position_y;
-    SpriteRendererComponent(const Sprite &s);
+    SpriteRendererComponent(Sprite &&s) noexcept;
     void DrawDetails(void);
   };
 }
