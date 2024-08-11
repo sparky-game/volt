@@ -20,7 +20,7 @@ namespace volt::runtime {
   }
 
   bool TransformComponent::Deserialize(YAML::Node &in) {
-    auto position_serialized { in["Position"].template as<std::string>() };
+    auto position_serialized { in["Position"].as<std::string>() };
     float position_tmp_x {0}, position_tmp_y {0};
     if (2 != std::sscanf(position_serialized.c_str(), "(%f, %f)", &position_tmp_x, &position_tmp_y)) {
       VOLT_LOG_ERROR("volt::runtime::TransformComponent::Deserialize :: `{}.Position` value format not valid",

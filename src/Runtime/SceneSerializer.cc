@@ -6,6 +6,7 @@
 #include "../Core/LogSystem.hh"
 #include "TransformComponent.hh"
 #include "Rigidbody2DComponent.hh"
+#include "../Renderer/SpriteRendererComponent.hh"
 
 namespace volt::runtime {
   static inline void SerializeEntity(auto &out, Entity &e) {
@@ -17,6 +18,9 @@ namespace volt::runtime {
     }
     if (e.HasComponent<Rigidbody2DComponent>()) {
       e.GetComponent<Rigidbody2DComponent>().Serialize(out);
+    }
+    if (e.HasComponent<renderer::SpriteRendererComponent>()) {
+      e.GetComponent<renderer::SpriteRendererComponent>().Serialize(out);
     }
     out << YAML::EndMap;
   }
@@ -31,6 +35,11 @@ namespace volt::runtime {
     if (in_rigidbody2d) {
       auto &rb { e.template AddComponent<Rigidbody2DComponent>() };
       if (not rb.Deserialize(in_rigidbody2d)) return false;
+    }
+    auto in_spriterenderer { in[renderer::SpriteRendererComponent::cmp_name] };
+    if (in_spriterenderer) {
+      auto &sr { e.template AddComponent<renderer::SpriteRendererComponent>(renderer::Sprite{}) };
+      if (not sr.Deserialize(in_spriterenderer)) return false;
     }
     return true;
   }

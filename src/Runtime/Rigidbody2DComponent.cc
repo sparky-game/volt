@@ -20,7 +20,7 @@ namespace volt::runtime {
   }
 
   bool Rigidbody2DComponent::Deserialize(YAML::Node &in) {
-    auto velocity_serialized { in["Velocity"].template as<std::string>() };
+    auto velocity_serialized { in["Velocity"].as<std::string>() };
     float velocity_tmp_x {0}, velocity_tmp_y {0};
     if (2 != std::sscanf(velocity_serialized.c_str(), "(%f, %f)", &velocity_tmp_x, &velocity_tmp_y)) {
       VOLT_LOG_ERROR("volt::runtime::Rigidbody2DComponent::Deserialize :: `{}.Velocity` value format not valid",
