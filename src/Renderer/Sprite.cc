@@ -47,8 +47,8 @@ namespace volt::renderer {
   void Sprite::Reset(const std::filesystem::path &path) {
     static std::string failed_texture_name;
     if (path == m_name) return;
-    if (m_name != "default" or not std::filesystem::exists(path) or not std::filesystem::is_regular_file(path)) {
-      loadDefaultTexture();
+    if (not std::filesystem::exists(path) or not std::filesystem::is_regular_file(path)) {
+      if (m_name != "default") loadDefaultTexture();
       throw std::runtime_error { "`" + std::string(path) + "` does not represent a valid path" };
     }
     if (path == failed_texture_name) return;
