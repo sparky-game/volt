@@ -6,8 +6,8 @@ namespace volt::runtime {
     : m_id{id}, m_scene{scene}
   {}
 
-  Scene::Scene(void)
-    : m_running{false}
+  Scene::Scene(const std::string &name)
+    : m_name{name}, m_running{false}
   {}
 
   Entity Scene::CreateEntity(const std::string &name) {

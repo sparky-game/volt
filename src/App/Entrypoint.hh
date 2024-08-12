@@ -39,7 +39,7 @@ int main(void) {
   volt::runtime::PhysicsSystem physics;
   volt::runtime::InputSystem input;
 
-  volt::runtime::Scene scene;
+  volt::runtime::Scene scene { "Main" };
   app->Start(scene);
   if (not renderer.IsEditor()) scene.Play();
 

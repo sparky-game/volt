@@ -57,7 +57,7 @@ namespace volt::runtime {
     }
     YAML::Emitter out;
     out << YAML::BeginMap;
-    out << YAML::Key << "Scene"    << YAML::Value << "Untitled";
+    out << YAML::Key << "Scene"    << YAML::Value << m_scene->GetName();
     out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
     m_scene->ForAll<runtime::TagComponent>([&](auto e, auto &) {
       SerializeEntity(out, e);
@@ -77,11 +77,13 @@ namespace volt::runtime {
     std::stringstream ss;
     ss << ifs.rdbuf();
     YAML::Node data { YAML::Load(ss.str()) };
-    if (not data["Scene"]) {
+    auto name { data["Scene"] };
+    if (not name) {
       VOLT_LOG_ERROR("volt::runtime::SceneSerializer({})::Deserialize('{}') :: file format not valid",
                      fmt::ptr(m_scene), std::string(path));
       return false;
     }
+    m_scene->SetName(name.as<std::string>());
     auto entities { data["Entities"] };
     if (entities) {
       for (auto e : entities) {
