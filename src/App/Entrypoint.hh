@@ -13,6 +13,7 @@
 // Systems
 #include "../Core/VFS.hh"
 #include "../Core/LogSystem.hh"
+#include "../Runtime/Project.hh"
 #include "../Runtime/InputSystem.hh"
 #include "../Runtime/PhysicsSystem.hh"
 #include "../Renderer/RenderSystem.hh"
@@ -39,7 +40,11 @@ int main(void) {
   volt::runtime::PhysicsSystem physics;
   volt::runtime::InputSystem input;
 
-  volt::runtime::Scene scene { "Main" };
+  volt::runtime::Project proj {{
+      .name = app_spec.renderer.name,
+      .path = "."
+    }};
+  auto &scene { *proj.CreateScene("Main") };
   app->Start(scene);
   if (not renderer.IsEditor()) scene.Play();
 
