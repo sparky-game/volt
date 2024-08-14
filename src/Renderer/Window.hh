@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <optional>
 #include "Sprite.hh"
+#include "../Core/Vector2.hh"
 #include "RenderSystemSpec.hh"
 
 namespace volt::renderer {
@@ -16,7 +17,7 @@ namespace volt::renderer {
     ~Window(void);
     bool IsOpen(void) const;
     void Clear(uint32_t color) const;
-    void Draw(const Sprite &s, uint32_t x, uint32_t y);
+    void Draw(const Sprite &s, const core::Vector2<int32_t> &position);
     void Update(void);
     const RenderTexture *GetEditorViewportFBO(void) const;
   };

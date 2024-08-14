@@ -30,9 +30,9 @@ namespace volt::renderer {
     ClearBackground(GetColor(color));
   }
 
-  void Window::Draw(const Sprite &s, uint32_t x, uint32_t y) {
+  void Window::Draw(const Sprite &s, const core::Vector2<int32_t> &position) {
     if (m_spec.is_editor) BeginTextureMode(*m_editorViewport);
-    DrawTexture(s.data(), x, y, WHITE);
+    DrawTexture(s.data(), position.X(), position.Y(), WHITE);
     if (m_spec.is_editor) EndTextureMode();
   }
 

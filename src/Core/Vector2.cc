@@ -30,14 +30,6 @@ namespace volt::core {
   }
 
   template <typename T>
-  constexpr Vector2<T> Vector2<T>::operator+(const Vector2 &v) const noexcept {
-    return {
-      m_x + v.m_x,
-      m_y + v.m_y
-    };
-  }
-
-  template <typename T>
   constexpr Vector2<T> Vector2<T>::operator-(const Vector2 &v) const noexcept {
     return *this + (-1 * v);
   }

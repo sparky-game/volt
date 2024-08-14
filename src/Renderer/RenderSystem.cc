@@ -25,7 +25,7 @@ namespace volt::renderer {
       ClearBackground(GetColor(0x333333FF));
     }
     s.ForAll<SpriteRendererComponent>([this](auto, auto &r) {
-      m_window.Draw(r.sprite, r.position.X(), r.position.Y());
+      m_window.Draw(r.sprite, r.position);
     });
     if (IsEditor()) {
       EndTextureMode();

@@ -14,8 +14,7 @@ namespace volt::runtime {
 
   void InputSystem::Update(Scene &s) {
     s.ForAll<InputComponent, Rigidbody2DComponent>([](auto, auto &i, auto &rb) {
-      rb.velocity.X(0);
-      rb.velocity.Y(0);
+      rb.velocity = {0, 0};
       if (IsKeyDown(i.left))  rb.velocity.X(rb.velocity.X() - i.impulse);
       if (IsKeyDown(i.right)) rb.velocity.X(rb.velocity.X() + i.impulse);
       if (IsKeyDown(i.up))    rb.velocity.Y(rb.velocity.Y() - i.impulse);

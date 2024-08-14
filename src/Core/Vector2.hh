@@ -13,6 +13,12 @@ namespace volt::core {
     inline constexpr void X(T x) noexcept { m_x = x; }
     inline constexpr T Y(void) const noexcept { return m_y; }
     inline constexpr void Y(T y) noexcept { m_y = y; }
+    inline constexpr Vector2 Add(const Vector2 &v) const noexcept {
+      return {
+        m_x + v.m_x,
+        m_y + v.m_y
+      };
+    }
     constexpr T Dot(const Vector2 &v) const noexcept;
     constexpr T LengthSquared(void) const noexcept;
     constexpr T Length(void) const noexcept;
@@ -25,7 +31,8 @@ namespace volt::core {
     static inline constexpr Vector2 up(void)    noexcept { return {0, 1};  }
     static inline constexpr Vector2 one(void)   noexcept { return {1, 1};  }
     constexpr auto operator<=>(const Vector2 &) const noexcept = default;
-    constexpr Vector2 operator+(const Vector2 &v) const noexcept;
+    inline constexpr Vector2 operator+(const Vector2 &v) const noexcept { return Add(v); }
+    inline constexpr void operator+=(const Vector2 &v) noexcept { *this = *this + v; }
     constexpr Vector2 operator-(const Vector2 &v) const noexcept;
     constexpr T operator*(const Vector2 &v) const noexcept;
     constexpr Vector2 operator*(const T s) const noexcept;
