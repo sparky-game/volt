@@ -6,16 +6,16 @@
 
 namespace volt::runtime {
   TransformComponent::TransformComponent(void)
-    : position_x{0}, position_y{0}
+    : position{0, 0}
   {}
 
   TransformComponent::TransformComponent(float pos_x, float pos_y)
-    : position_x{pos_x}, position_y{pos_y}
+    : position{pos_x, pos_y}
   {}
 
   void TransformComponent::Serialize(YAML::Emitter &out) {
     out << YAML::Key << TransformComponent::cmp_name << YAML::BeginMap;
-    out << YAML::Key << "Position" << YAML::Value << std::format("({:.3f}, {:.3f})", position_x, position_y);
+    out << YAML::Key << "Position" << YAML::Value << std::format("({:.3f}, {:.3f})", position.X(), position.Y());
     out << YAML::EndMap;
   }
 
@@ -27,18 +27,18 @@ namespace volt::runtime {
                      TransformComponent::cmp_name);
       return false;
     }
-    position_x = position_tmp_x;
-    position_y = position_tmp_y;
+    position.X(position_tmp_x);
+    position.Y(position_tmp_y);
     return true;
   }
 
   void TransformComponent::DrawDetails(void) {
     if (ImGui::CollapsingHeader(TransformComponent::cmp_name)) {
       // TODO: use Vector2 to simplify this and be able to pass the data directly.
-      float position_tmp[] { position_x, position_y };
+      float position_tmp[] { position.X(), position.Y() };
       ImGui::InputFloat2("Position", position_tmp);
-      position_x = position_tmp[0];
-      position_y = position_tmp[1];
+      position.X(position_tmp[0]);
+      position.Y(position_tmp[1]);
     }
   }
 }

@@ -7,7 +7,12 @@ namespace volt::core {
   class Vector2 {
     T m_x, m_y;
   public:
-    constexpr Vector2(T x, T y) noexcept;
+    constexpr Vector2(void) = default;
+    inline constexpr Vector2(T x, T y) noexcept : m_x{x}, m_y{y} {}
+    inline constexpr T X(void) const noexcept { return m_x; }
+    inline constexpr void X(T x) noexcept { m_x = x; }
+    inline constexpr T Y(void) const noexcept { return m_y; }
+    inline constexpr void Y(T y) noexcept { m_y = y; }
     constexpr T Dot(const Vector2 &v) const noexcept;
     constexpr T LengthSquared(void) const noexcept;
     constexpr T Length(void) const noexcept;

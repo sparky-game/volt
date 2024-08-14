@@ -7,7 +7,14 @@ namespace volt::core {
   class Vector3 {
     T m_x, m_y, m_z;
   public:
-    constexpr Vector3(T x, T y, T z) noexcept;
+    constexpr Vector3(void) = default;
+    inline constexpr Vector3(T x, T y, T z) noexcept : m_x{x}, m_y{y}, m_z{z} {}
+    inline constexpr T X(void) const noexcept { return m_x; }
+    inline constexpr void X(T x) noexcept { m_x = x; }
+    inline constexpr T Y(void) const noexcept { return m_y; }
+    inline constexpr void Y(T y) noexcept { m_y = y; }
+    inline constexpr T Z(void) const noexcept { return m_z; }
+    inline constexpr void Z(T z) noexcept { m_z = z; }
     constexpr T Dot(const Vector3 &v) const noexcept;
     constexpr T LengthSquared(void) const noexcept;
     constexpr T Length(void) const noexcept;

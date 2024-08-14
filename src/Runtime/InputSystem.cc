@@ -13,13 +13,13 @@ namespace volt::runtime {
   }
 
   void InputSystem::Update(Scene &s) {
-    s.ForAll<InputComponent, Rigidbody2DComponent>([]([[maybe_unused]] auto e, auto &i, auto &rb) {
-      rb.velocity_x = 0;
-      rb.velocity_y = 0;
-      if (IsKeyDown(i.left))  rb.velocity_x -= i.impulse;
-      if (IsKeyDown(i.right)) rb.velocity_x += i.impulse;
-      if (IsKeyDown(i.up))    rb.velocity_y -= i.impulse;
-      if (IsKeyDown(i.down))  rb.velocity_y += i.impulse;
+    s.ForAll<InputComponent, Rigidbody2DComponent>([](auto, auto &i, auto &rb) {
+      rb.velocity.X(0);
+      rb.velocity.Y(0);
+      if (IsKeyDown(i.left))  rb.velocity.X(rb.velocity.X() - i.impulse);
+      if (IsKeyDown(i.right)) rb.velocity.X(rb.velocity.X() + i.impulse);
+      if (IsKeyDown(i.up))    rb.velocity.Y(rb.velocity.Y() - i.impulse);
+      if (IsKeyDown(i.down))  rb.velocity.Y(rb.velocity.Y() + i.impulse);
     });
   }
 }

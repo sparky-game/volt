@@ -7,10 +7,10 @@ namespace volt::runtime {
     if (e.HasComponent<TransformComponent>() && e.HasComponent<Rigidbody2DComponent>()) {
       auto &t  { e.GetComponent<TransformComponent>()   };
       auto &rb { e.GetComponent<Rigidbody2DComponent>() };
-      if (t.position_x <= 0)   { t.position_x = 0; rb.velocity_x = -rb.velocity_x;   }
-      if (t.position_y <= 0)   { t.position_y = 0; rb.velocity_y = -rb.velocity_y;   }
-      if (t.position_x >= 640) { t.position_x = 640; rb.velocity_x = -rb.velocity_x; }
-      if (t.position_y >= 456) { t.position_y = 456; rb.velocity_y = -rb.velocity_y; }
+      if (t.position.X() <= 0)   { t.position.X(0); rb.velocity.X(-rb.velocity.X());   }
+      if (t.position.Y() <= 0)   { t.position.Y(0); rb.velocity.Y(-rb.velocity.Y());   }
+      if (t.position.X() >= 640) { t.position.X(640); rb.velocity.X(-rb.velocity.X()); }
+      if (t.position.Y() >= 456) { t.position.Y(456); rb.velocity.Y(-rb.velocity.Y()); }
     }
   }
 }

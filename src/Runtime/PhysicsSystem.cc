@@ -13,9 +13,9 @@ namespace volt::runtime {
   }
 
   void PhysicsSystem::Update(Scene &s) {
-    s.ForAll<TransformComponent, Rigidbody2DComponent>([]([[maybe_unused]] auto e, auto &t, auto &rb) {
-      t.position_x += rb.velocity_x;
-      t.position_y += rb.velocity_y;
+    s.ForAll<TransformComponent, Rigidbody2DComponent>([](auto, auto &t, auto &rb) {
+      t.position.X(t.position.X() + rb.velocity.X());
+      t.position.Y(t.position.Y() + rb.velocity.Y());
     });
   }
 }

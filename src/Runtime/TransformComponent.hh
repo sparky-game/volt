@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Core/Vector2.hh"
+
 namespace YAML {
   class Emitter;
   class Node;
@@ -8,8 +10,7 @@ namespace YAML {
 namespace volt::runtime {
   struct TransformComponent {
     static inline auto cmp_name { "Transform" };
-    // Vector2<float> position;
-    float position_x, position_y;
+    core::Vector2<float> position;
     TransformComponent(void);
     TransformComponent(float pos_x, float pos_y);
     void Serialize(YAML::Emitter &out);

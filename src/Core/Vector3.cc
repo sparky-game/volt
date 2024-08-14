@@ -3,9 +3,6 @@
 
 namespace volt::core {
   template <typename T>
-  constexpr Vector3<T>::Vector3(T x, T y, T z) noexcept : m_x{x}, m_y{y}, m_z{z} {}
-
-  template <typename T>
   constexpr T Vector3<T>::Dot(const Vector3 &v) const noexcept {
     return (m_x * v.m_x) + (m_y * v.m_y) + (m_z * v.m_z);
   }
