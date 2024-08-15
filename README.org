@@ -46,6 +46,7 @@ Write games, don't play them
 (...)
 
 * Table of Contents :toc:
+- [[#project-management][Project management]]
 - [[#documentation][Documentation]]
 - [[#usage][Usage]]
 - [[#build-from-source][Build from source]]
@@ -54,6 +55,12 @@ Write games, don't play them
     - [[#debug][Debug]]
     - [[#release][Release]]
   - [[#compilation-and-linkage][Compilation and linkage]]
+
+* Project management
+
+GitHub is the system we use to track feature requests, bug reports and other requested work. Different projects are created to separate concerns and responsabilities:
+
+- [[https://github.com/orgs/sparky-game/projects/2][Roadmap]]
 
 * Documentation
 
