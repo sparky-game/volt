@@ -32,9 +32,10 @@ Write games, don't play them
 # Repository info badges
 #+begin_html
 <p align="center">
+<img src="https://img.shields.io/github/license/sparky-game/volt?color=blue" alt="License">
 <img src="https://img.shields.io/badge/C++-20-blue" alt="C++ Standard">
-<img src="https://img.shields.io/github/repo-size/sparky-game/skap-cpp?color=blue" alt="Size">
-<img src="https://img.shields.io/github/v/tag/sparky-game/skap-cpp?color=blue" alt="Release">
+<img src="https://img.shields.io/github/repo-size/sparky-game/volt?color=blue" alt="Size">
+<img src="https://img.shields.io/github/v/tag/sparky-game/volt?color=blue" alt="Release">
 <img src="https://img.shields.io/badge/speed-%F0%9F%94%A5blazing-blue" alt="Blazing Speed">
 </p>
 #+end_html
