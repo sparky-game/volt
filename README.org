@@ -66,7 +66,7 @@ GitHub is the system we use to track feature requests, bug reports and other req
 
 The documentation of /Volt/ includes:
 
-- Main documentation /(Coming soon!)/
+- [[https://github.com/sparky-game/volt/wiki][Main documentation]]
 - Reference manual /(Coming soon!)/
 - API documentation /(Coming soon!)/
 
