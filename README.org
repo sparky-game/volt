@@ -38,6 +38,8 @@ Write games, don't play them
 <img src="https://img.shields.io/github/v/tag/sparky-game/volt?color=blue" alt="Release">
 <img src="https://cla-assistant.io/readme/badge/sparky-game/volt" alt="CLAs signed">
 <img src="https://img.shields.io/badge/speed-%F0%9F%94%A5blazing-blue" alt="Blazing Speed">
+<br/>
+<img src="https://www.bestpractices.dev/projects/9364/badge" alt="OpenSSF Best Practices">
 </p>
 #+end_html
 
