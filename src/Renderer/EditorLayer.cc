@@ -94,13 +94,13 @@ namespace volt::renderer {
       auto e { s.FindEntityByID(m_selectedEntityID) };
       if (e) {
         if (e->HasComponent<runtime::TransformComponent>()) {
-          e->GetComponent<runtime::TransformComponent>().DrawDetails();
+          e->GetComponent<runtime::TransformComponent>().Draw();
         }
         if (e->HasComponent<runtime::Rigidbody2DComponent>()) {
-          e->GetComponent<runtime::Rigidbody2DComponent>().DrawDetails();
+          e->GetComponent<runtime::Rigidbody2DComponent>().Draw();
         }
         if (e->HasComponent<SpriteRendererComponent>()) {
-          e->GetComponent<SpriteRendererComponent>().DrawDetails();
+          e->GetComponent<SpriteRendererComponent>().Draw();
         }
         if (ImGui::Button("Add component")) {
           ImGui::OpenPopup("add_cmp_ctx_menu");

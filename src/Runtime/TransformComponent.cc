@@ -32,7 +32,7 @@ namespace volt::runtime {
     return true;
   }
 
-  void TransformComponent::DrawDetails(void) {
+  void TransformComponent::Draw(void) {
     if (ImGui::CollapsingHeader(TransformComponent::cmp_name)) {
       // TODO: use Vector2 to simplify this and be able to pass the data directly.
       float position_tmp[] { position.X(), position.Y() };

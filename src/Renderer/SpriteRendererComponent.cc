@@ -24,7 +24,7 @@ namespace volt::renderer {
     return true;
   }
 
-  void SpriteRendererComponent::DrawDetails(void) {
+  void SpriteRendererComponent::Draw(void) {
     static bool is_first_time { true };
     static std::array<char, 32> sprite_path { "default" };
     if (is_first_time) {

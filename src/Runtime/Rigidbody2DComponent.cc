@@ -32,7 +32,7 @@ namespace volt::runtime {
     return true;
   }
 
-  void Rigidbody2DComponent::DrawDetails(void) {
+  void Rigidbody2DComponent::Draw(void) {
     if (ImGui::CollapsingHeader(Rigidbody2DComponent::cmp_name)) {
       // TODO: use Vector2 to simplify this and be able to pass the data directly.
       float velocity_tmp[] { velocity.X(), velocity.Y() };
