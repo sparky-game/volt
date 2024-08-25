@@ -8,9 +8,7 @@
 #define XSTR(s) STR(s)
 #define STR(s) #s
 
-#if defined(__clang__)
-#define CXX_VERSION __VERSION__
-#elif defined(__GNUC__)
+#if defined(__clang__) || defined(__GNUC__)
 #define CXX_VERSION __VERSION__
 #elif defined(_MSC_VER)
 #define CXX_VERSION _MSC_FULL_VER
