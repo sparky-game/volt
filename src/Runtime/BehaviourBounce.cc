@@ -3,7 +3,7 @@
 #include "Rigidbody2DComponent.hh"
 
 namespace volt::runtime {
-  void BehaviourBounce::Run(Entity &e) {
+  void BehaviourBounce::Update(Entity &e) {
     if (e.HasComponent<TransformComponent>() && e.HasComponent<Rigidbody2DComponent>()) {
       auto &t  { e.GetComponent<TransformComponent>()   };
       auto &rb { e.GetComponent<Rigidbody2DComponent>() };

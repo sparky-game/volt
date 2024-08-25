@@ -8,6 +8,6 @@ namespace volt::runtime {
     BehaviourShootFreq(uint32_t count);
     uint32_t initialCount;
     uint32_t counter { initialCount };
-    void Run(Entity &e) final;
+    void Update(Entity &e) final;
   };
 }

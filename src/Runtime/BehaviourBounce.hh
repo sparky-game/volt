@@ -5,6 +5,6 @@
 
 namespace volt::runtime {
   struct BehaviourBounce : public IBehaviour {
-    void Run(Entity &e) final;
+    void Update(Entity &e) final;
   };
 }

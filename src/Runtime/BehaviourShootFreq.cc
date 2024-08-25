@@ -7,7 +7,7 @@ namespace volt::runtime {
     : initialCount{count}
   {}
 
-  void BehaviourShootFreq::Run(Entity &e) {
+  void BehaviourShootFreq::Update(Entity &e) {
     if (e.HasComponent<TransformComponent>()) {
       [[maybe_unused]] auto &t { e.GetComponent<TransformComponent>() };
       if (counter-- == 0) {

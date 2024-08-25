@@ -5,6 +5,6 @@ namespace volt::runtime {
 
   struct IBehaviour {
     virtual ~IBehaviour(void) = default;
-    virtual void Run(Entity &e) = 0;
+    virtual void Update(Entity &e) = 0;
   };
 }
