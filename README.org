@@ -53,7 +53,7 @@ Write games, don't play them
   - [[#get-the-code][Get the code]]
   - [[#configuration][Configuration]]
   - [[#compilation-and-linkage][Compilation and linkage]]
-- [[#license][License]]
+- [[#licensing][Licensing]]
 
 * Project management
 
@@ -112,6 +112,16 @@ cmake --build <BUILD_DIR>
 
 (...)
 
-* License
+* Licensing
 
-(...)
+Copyright (C) 2024 Wasym A. Alonso. All rights reserved.
+
+/Volt/ is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License Version 3 (GNU AGPL-3.0) as published by the Free Software Foundation (FSF) on November 19th 2007. @@html:<br>@@
+/Volt/ is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License Version 3 for more details. @@html:<br>@@
+For more information, see <https://www.gnu.org/licenses/agpl-3.0>.
+
+As mentioned above, /Volt/ is licensed under the *GNU AGPL-3.0*, which means that any games or software created using /Volt/ are also subject to the same license. This implies that if you develop a game or application using /Volt/, it must also be released as free software under the *GNU AGPL-3.0*. This ensures that the freedoms to use, study, modify and share the software are preserved for everyone.
+
+If you prefer to release your game or application under a different, more commercially friendly license, there is an option available. You can obtain a commercial license for /Volt/ that does not require you to release your games under the *GNU AGPL-3.0*. This license is available for purchase, allowing you more flexibility in how you distribute and monetize your work.
+
+For more details and to acquire the commercial license, please visit [[https://iwas-coder.itch.io/volt][its product page in itch.io]].
