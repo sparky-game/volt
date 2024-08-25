@@ -52,9 +52,8 @@ Write games, don't play them
 - [[#build-from-source][Build from source]]
   - [[#get-the-code][Get the code]]
   - [[#configuration][Configuration]]
-    - [[#debug][Debug]]
-    - [[#release][Release]]
   - [[#compilation-and-linkage][Compilation and linkage]]
+- [[#license][License]]
 
 * Project management
 
@@ -99,20 +98,8 @@ git submodule update --init --recursive
 
 (...)
 
-*** Debug
-
-(...)
-
 #+begin_src sh
-cmake -B build.debug.d -DCMAKE_BUILD_TYPE=Debug
-#+end_src
-
-*** Release
-
-(...)
-
-#+begin_src sh
-cmake -B build.release.d
+cmake -B build [-DCMAKE_BUILD_TYPE=Debug]
 #+end_src
 
 ** Compilation and linkage
@@ -122,5 +109,9 @@ cmake -B build.release.d
 #+begin_src sh
 cmake --build <BUILD_DIR>
 #+end_src
+
+(...)
+
+* License
 
 (...)
