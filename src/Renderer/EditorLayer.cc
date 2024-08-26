@@ -147,10 +147,18 @@ namespace volt::renderer {
   }
 
   void EditorLayer::Setup(void) const noexcept {
+    // TODO: think about the editor layout config file (`volt.ini`) and where to store it in both debug and release builds.
+    /*
+      std::filesystem::path dir { GetApplicationDirectory() };
+      dir = dir.parent_path().parent_path().parent_path();
+      if (not ChangeDirectory(GetApplicationDirectory())) {
+      VOLT_LOG_WARN("volt::renderer::EditorLayer::Setup :: could not change CWD to Volt's root directory");
+      }
+    */
     rlImGuiSetup(true);
     ImGuiIO &imgui_io { ImGui::GetIO() };
     imgui_io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    // imgui_io.IniFilename = nullptr;
+    imgui_io.IniFilename = "volt.ini";
     imgui_io.LogFilename = nullptr;
     imgui_io.ConfigWindowsMoveFromTitleBarOnly = true;
   }
