@@ -8,7 +8,9 @@ namespace volt::renderer {
   struct SpriteRendererComponent : public runtime::IComponent {
     static inline auto cmp_name { "SpriteRenderer" };
     Sprite sprite;
-    core::Vector2<int32_t> position;
+    core::Vector2<float> position;
+    float rotation;
+    float scale;
     SpriteRendererComponent(Sprite &&s) noexcept;
     void Serialize(YAML::Emitter &out) final;
     bool Deserialize(YAML::Node &in) final;

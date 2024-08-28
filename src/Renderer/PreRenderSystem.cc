@@ -16,6 +16,8 @@ namespace volt::renderer {
     s.ForAll<SpriteRendererComponent, runtime::TransformComponent>([](auto, auto &r, auto &t) {
       r.position.X(std::round(t.position.X()));
       r.position.Y(std::round(t.position.Y()));
+      r.rotation = t.rotation;
+      r.scale = t.scale;
     });
     BeginDrawing();
     m_renderer.GetWindowHandle()->Clear(0);

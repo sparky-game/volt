@@ -9,6 +9,8 @@
 #include "RenderSystemSpec.hh"
 
 namespace volt::renderer {
+  struct SpriteRendererComponent;
+
   class Window {
     RenderSystemSpec m_spec;
     std::optional<RenderTexture> m_editorViewport;
@@ -17,7 +19,7 @@ namespace volt::renderer {
     ~Window(void);
     bool IsOpen(void) const;
     void Clear(uint32_t color) const;
-    void Draw(const Sprite &s, const core::Vector2<int32_t> &position);
+    void Draw(const SpriteRendererComponent &sr);
     void Update(void);
     const RenderTexture *GetEditorViewportFBO(void) const;
   };

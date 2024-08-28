@@ -2,6 +2,7 @@
 #include <rlImGui.h>
 #include "Window.hh"
 #include "EditorLayer.hh"
+#include "../Core/LogSystem.hh"
 #include "SpriteRendererComponent.hh"
 #include "../Runtime/TransformComponent.hh"
 #include "../Runtime/Rigidbody2DComponent.hh"
@@ -147,18 +148,18 @@ namespace volt::renderer {
   }
 
   void EditorLayer::Setup(void) const noexcept {
-    // TODO: think about the editor layout config file (`volt.ini`) and where to store it in both debug and release builds.
-    /*
-      std::filesystem::path dir { GetApplicationDirectory() };
-      dir = dir.parent_path().parent_path().parent_path();
+    static constexpr auto config_filename { "volt.ini" };
+    if (not std::filesystem::exists(config_filename) or not std::filesystem::is_regular_file(config_filename)) {
       if (not ChangeDirectory(GetApplicationDirectory())) {
-      VOLT_LOG_WARN("volt::renderer::EditorLayer::Setup :: could not change CWD to Volt's root directory");
+        VOLT_LOG_WARN("volt::renderer::EditorLayer::Setup :: could not change CWD to Volt's editor binary directory");
+        // TODO: download the file from the repo.
       }
-    */
+      // TODO: check if it's present, if it's not then download it from the repo.
+    }
     rlImGuiSetup(true);
     ImGuiIO &imgui_io { ImGui::GetIO() };
     imgui_io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    imgui_io.IniFilename = "volt.ini";
+    imgui_io.IniFilename = config_filename;
     imgui_io.LogFilename = nullptr;
     imgui_io.ConfigWindowsMoveFromTitleBarOnly = true;
   }

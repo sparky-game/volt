@@ -1,5 +1,6 @@
 #include <cassert>
 #include "Window.hh"
+#include "SpriteRendererComponent.hh"
 
 namespace volt::renderer {
   Window::Window(const RenderSystemSpec &spec)
@@ -30,10 +31,21 @@ namespace volt::renderer {
     ClearBackground(GetColor(color));
   }
 
-  void Window::Draw(const Sprite &s, const core::Vector2<int32_t> &position) {
+  void Window::Draw(const SpriteRendererComponent &sr) {
     if (m_spec.is_editor) BeginTextureMode(*m_editorViewport);
-    DrawTexture(s.data(), position.X(), position.Y(), WHITE);
-    if (m_spec.is_editor) EndTextureMode();
+    float tex_width = sr.sprite.data().width, tex_height = sr.sprite.data().height;
+    float pos_x = sr.position.X() + (tex_width / 2), pos_y = sr.position.Y() + (tex_height / 2);
+    DrawTexturePro(sr.sprite.data(),
+                   {0, 0, tex_width, tex_height},
+                   {pos_x, pos_y, tex_width * sr.scale, tex_height * sr.scale},
+                   {(tex_width / 2) * sr.scale, (tex_height / 2) * sr.scale},
+                   sr.rotation,
+                   WHITE);
+    if (m_spec.is_editor) {
+      // TODO: this circle is provisional, replace it with a gizmo to move, rotate and scale it.
+      DrawCircle(pos_x, pos_y, 4, RED);
+      EndTextureMode();
+    }
   }
 
   void Window::Update(void) {

@@ -7,8 +7,9 @@ namespace volt::runtime {
   struct TransformComponent : public IComponent {
     static inline auto cmp_name { "Transform" };
     core::Vector2<float> position;
-    TransformComponent(void);
-    TransformComponent(float pos_x, float pos_y);
+    float rotation;
+    float scale;
+    TransformComponent(const core::Vector2<float> &p = core::Vector2<>::zero(), float r = 0, float s = 1);
     void Serialize(YAML::Emitter &out) final;
     bool Deserialize(YAML::Node &in) final;
     void Draw(void) final;
