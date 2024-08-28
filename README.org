@@ -107,7 +107,7 @@ cmake -B build [-DCMAKE_BUILD_TYPE=Debug]
 (...)
 
 #+begin_src sh
-cmake --build <BUILD_DIR>
+cmake --build build
 #+end_src
 
 (...)
