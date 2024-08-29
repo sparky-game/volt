@@ -9,7 +9,7 @@ namespace volt::renderer {
     core::SnowflakeID::value_type m_selectedEntityID {0};
     void drawMenubar(void) noexcept;
     void drawControls(runtime::Scene &s) noexcept;
-    void drawScene(Window &w) const noexcept;
+    void drawScene(runtime::Scene &s, Window &w) const noexcept;
     void drawHierarchy(runtime::Scene &s) noexcept;
     void drawInspector(runtime::Scene &s) const noexcept;
     void drawProject(void) const noexcept;

@@ -1,11 +1,16 @@
 #include <imgui.h>
 #include <rlImGui.h>
 #include "Window.hh"
+#include <ImGuizmo.h>
 #include "EditorLayer.hh"
 #include "../Core/LogSystem.hh"
 #include "SpriteRendererComponent.hh"
 #include "../Runtime/TransformComponent.hh"
 #include "../Runtime/Rigidbody2DComponent.hh"
+
+extern "C" {
+#include <raymath.h>
+}
 
 namespace volt::renderer {
   void EditorLayer::drawMenubar(void) noexcept {
@@ -36,11 +41,34 @@ namespace volt::renderer {
     ImGui::End();
   }
 
-  void EditorLayer::drawScene(Window &w) const noexcept {
+  void EditorLayer::drawScene(runtime::Scene &s, Window &w) const noexcept {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     if (ImGui::Begin("Scene")) {
       rlImGuiImageRenderTextureFit(w.GetEditorViewportFBO(), true);
     }
+
+    // Gizmos
+    auto e { s.FindEntityByID(m_selectedEntityID) };
+    if (e and not s.IsRunning()) {
+      auto &t { e->GetComponent<runtime::TransformComponent>() };
+      ImVec2 win_size { ImGui::GetWindowSize() };
+      ImGuizmo::SetOrthographic(true);
+      ImGuizmo::SetDrawlist();
+      ImGuizmo::SetRect(0, 0, win_size.x, win_size.y);
+      static Matrix cameraView { MatrixIdentity() };
+      static Matrix cameraProjection { MatrixIdentity() };
+      static Matrix transform { MatrixTranslate(t.position.X(), t.position.Y(), 0) };
+      transform.m12 = t.position.X();
+      transform.m13 = t.position.Y();
+      ImGuizmo::Manipulate(&cameraView.m0, &cameraProjection.m0, ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::WORLD, &transform.m0);
+      if (ImGuizmo::IsUsing()) {
+        Vector3 position, rotation, scale;
+        ImGuizmo::DecomposeMatrixToComponents(&transform.m0, &position.x, &rotation.x, &scale.x);
+        t.position.X(position.x * win_size.x);
+        t.position.Y(position.y * -win_size.y);
+      }
+    }
+
     ImGui::End();
     ImGui::PopStyleVar();
   }
@@ -167,6 +195,7 @@ namespace volt::renderer {
   void EditorLayer::Draw(runtime::Scene &s, Window &w) noexcept {
     static bool is_first_time { true };
     rlImGuiBegin();
+    ImGuizmo::BeginFrame();
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
     if (is_first_time) {
       ImGui::OpenPopup("Welcome");
@@ -182,7 +211,7 @@ namespace volt::renderer {
     ImGui::ShowDemoWindow();  // TEMPORARY DEMO
     drawMenubar();
     drawControls(s);
-    drawScene(w);
+    drawScene(s, w);
     drawHierarchy(s);
     drawInspector(s);
     drawProject();
