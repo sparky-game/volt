@@ -43,6 +43,13 @@ Write games, don't play them
 </p>
 #+end_html
 
+# Repository CI badges
+#+begin_html
+<p align="center">
+<img src="https://github.com/sparky-game/volt/actions/workflows/ci.yaml/badge.svg" alt="CI">
+</p>
+#+end_html
+
 (...)
 
 * Table of Contents :toc:
