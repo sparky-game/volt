@@ -34,7 +34,7 @@ jobs:
         with:
           submodules: recursive
       - name: install-dependencies
-        run: sudo apt-get install -y libxcursor-dev libxrandr-dev
+        run: sudo apt-get install -y libxcursor-dev libxrandr-dev libxinerama-dev
       - name: setup-codeql
         uses: github/codeql-action/init@v3
         with:
