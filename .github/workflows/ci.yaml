@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/ci.yaml'
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+    paths-ignore:
+      - '.github/**'
+      - 'CITATION.cff'
+      - 'CODE_OF_CONDUCT.md'
+      - 'CONTRIBUTING.org'
+      - 'COPYING'
+      - 'README.org'
+      - 'SECURITY.md'
+  schedule:
+    - cron: '0 9 * * 1'
+
+jobs:
+  ci:
+    permissions:
+      security-events: write
+    matrix:
+      build-type: [Debug, Release]
+    fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout-repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: setup-codeql
+        uses: github/codeql-action/init@v3
+        with:
+          languages: c-cpp
+          config: |
+            paths-ignore: [vendor]
+      - name: configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+      - name: build
+        run: cmake --build build
+      - name: analyze
+        uses: github/codeql-action/analyze@v3
