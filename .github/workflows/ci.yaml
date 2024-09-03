@@ -23,9 +23,10 @@ jobs:
   ci:
     permissions:
       security-events: write
-    matrix:
-      build-type: [Debug, Release]
-    fail-fast: false
+    strategy:
+      matrix:
+        build-type: [Debug, Release]
+      fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - name: checkout-repo
