@@ -11,6 +11,7 @@ add_library(yaml_cpp OBJECT ${YAML_CPP_SRCS})
 add_library(imgui_impl_raylib OBJECT ${IMGUI_IMPL_RAYLIB_SRCS})
 
 target_compile_definitions(raylib PRIVATE PLATFORM_DESKTOP)
+target_compile_definitions(yaml_cpp PRIVATE YAML_CPP_STATIC_DEFINE)
 
 target_include_directories(imguizmo SYSTEM PUBLIC imgui)
 target_include_directories(imgui_impl_raylib SYSTEM PUBLIC imgui)
