@@ -45,7 +45,7 @@ jobs:
         with:
           submodules: recursive
       - name: install-dependencies
-        run: >-
+        run: >
           sudo apt-get install -y
             libxcursor-dev
             libxrandr-dev
@@ -58,7 +58,7 @@ jobs:
           config: |
             paths-ignore: [vendor]
       - name: configure
-        run: >-
+        run: >
           cmake
             -B build
             -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
