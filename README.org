@@ -67,6 +67,7 @@ Write games, don't play them
 GitHub is the system we use to track feature requests, bug reports and other requested work. Different projects are created to separate concerns and responsabilities:
 
 - [[https://github.com/orgs/sparky-game/projects/2][Roadmap]]
+- User feedback /(Coming soon!)/
 
 * Documentation
 
