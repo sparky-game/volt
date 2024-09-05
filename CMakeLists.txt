@@ -20,6 +20,8 @@ set(CMAKE_PROJECT_VERSION 0.1-alpha)
 volt_set_c_compiler_options()
 volt_set_cxx_compiler_options()
 
+message(STATUS "The requested build target is ${CMAKE_SYSTEM}")
+
 add_subdirectory(vendor)
 add_subdirectory(editor)
 add_subdirectory(src)
