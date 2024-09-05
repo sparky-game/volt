@@ -10,7 +10,7 @@ namespace volt::core {
   constexpr void Slotmap<T, N, I>::clear(void) noexcept { freelist_init(); }
 
   template <typename T, size_t N, typename I>
-  constexpr Slotmap<T, N, I>::key_type Slotmap<T, N, I>::push_back(value_type &&value) {
+  constexpr typename Slotmap<T, N, I>::key_type Slotmap<T, N, I>::push_back(value_type &&value) {
     auto alloc_id { allocate() };
     auto &slot { m_indices[alloc_id] };
     m_data[slot.id] = std::move(value);
@@ -21,7 +21,7 @@ namespace volt::core {
   }
 
   template <typename T, size_t N, typename I>
-  constexpr Slotmap<T, N, I>::key_type Slotmap<T, N, I>::push_back(const value_type &value) {
+  constexpr typename Slotmap<T, N, I>::key_type Slotmap<T, N, I>::push_back(const value_type &value) {
     return push_back(value_type{value});
   }
 
@@ -39,7 +39,7 @@ namespace volt::core {
   }
 
   template <typename T, size_t N, typename I>
-  constexpr Slotmap<T, N, I>::idx_type Slotmap<T, N, I>::allocate(void) {
+  constexpr typename Slotmap<T, N, I>::idx_type Slotmap<T, N, I>::allocate(void) {
     if (m_size >= N) throw std::runtime_error { "No space left in Slotmap" };
     assert(m_freelist < N);
     auto slot_id { m_freelist };
