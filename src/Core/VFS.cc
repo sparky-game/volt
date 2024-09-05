@@ -8,6 +8,7 @@ namespace volt::core {
 
   VFS::~VFS(void) noexcept {
     VOLT_LOG_INFO("VFS: destroyed successfully");
+    VOLT_LOG_INFO("Engine halted");
   }
 
   void VFS::Mount(const std::filesystem::path &vpath, const std::filesystem::path &path) noexcept {

@@ -22,14 +22,14 @@ namespace volt::runtime {
     t.tag = name.empty() ? "Entity" : name;
     e.AddComponent<TransformComponent>();
     m_ids[id] = e;
-    VOLT_LOG_INFO("volt::runtime::Scene :: Entity created [{}|{}]", static_cast<core::SnowflakeID::value_type>(id), name);
+    VOLT_LOG_INFO("Scene: Entity created [{}|{}]", static_cast<core::SnowflakeID::value_type>(id), name);
     return e;
   }
 
   void Scene::DestroyEntity(Entity e) {
     m_ids.erase(e.GetID());
     m_registry.destroy(e);
-    VOLT_LOG_INFO("volt::runtime::Scene :: Entity destroyed [{}|{}]", e.GetID(), e.GetName());
+    VOLT_LOG_INFO("Scene: Entity destroyed [{}|{}]", e.GetID(), e.GetName());
   }
 
   std::optional<Entity> Scene::FindEntityByID(core::SnowflakeID::value_type id) {
