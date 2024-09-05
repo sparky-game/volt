@@ -7,7 +7,10 @@ on:
       - '.github/workflows/ci.yaml'
   pull_request:
     branches: [master]
-    types: [opened, synchronize]
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
     paths-ignore:
       - '.github/**'
       - 'CITATION.cff'
@@ -28,6 +31,7 @@ jobs:
         build-type: [Debug, Release]
       fail-fast: false
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
     steps:
       - name: checkout-repo
         uses: actions/checkout@v4
