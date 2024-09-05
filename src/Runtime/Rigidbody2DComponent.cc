@@ -1,4 +1,3 @@
-#include <format>
 #include <imgui.h>
 #include <yaml-cpp/yaml.h>
 #include "../Core/LogSystem.hh"
@@ -15,7 +14,7 @@ namespace volt::runtime {
 
   void Rigidbody2DComponent::Serialize(YAML::Emitter &out) {
     out << YAML::Key << Rigidbody2DComponent::cmp_name << YAML::BeginMap;
-    out << YAML::Key << "Velocity" << YAML::Value << std::format("({:.3f}, {:.3f})", velocity.X(), velocity.Y());
+    out << YAML::Key << "Velocity" << YAML::Value << fmt::format("({:.3f}, {:.3f})", velocity.X(), velocity.Y());
     out << YAML::EndMap;
   }
 
