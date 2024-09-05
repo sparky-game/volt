@@ -29,6 +29,13 @@ jobs:
     strategy:
       matrix:
         build-type: [Debug, Release]
+        c-compiler: [gcc, clang]
+        cxx-compiler: [g++, clang++]
+        exclude:
+          - c-compiler: gcc
+            cxx-compiler: clang++
+          - c-compiler: clang
+            cxx-compiler: g++
       fail-fast: false
     runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request.draft }}
@@ -38,7 +45,12 @@ jobs:
         with:
           submodules: recursive
       - name: install-dependencies
-        run: sudo apt-get install -y libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev
+        run: >-
+          sudo apt-get install -y
+            libxcursor-dev
+            libxrandr-dev
+            libxinerama-dev
+            libxi-dev
       - name: setup-codeql
         uses: github/codeql-action/init@v3
         with:
@@ -46,7 +58,12 @@ jobs:
           config: |
             paths-ignore: [vendor]
       - name: configure
-        run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+        run: >-
+          cmake
+            -B build
+            -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+            -DCMAKE_C_COMPILER=${{ matrix.c-compiler }}
+            -DCMAKE_CXX_COMPILER=${{ matrix.cxx-compiler }}
       - name: build
         run: cmake --build build
       - name: analyze
