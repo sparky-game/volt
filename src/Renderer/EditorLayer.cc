@@ -9,6 +9,15 @@
 #include "../Runtime/Rigidbody2DComponent.hh"
 
 extern "C" {
+  // NOTE: @raysan5 fixed this issue on raylib's commit `3801819` (2024/06/06).
+  // Commit diff: https://github.com/raysan5/raylib/commit/38018192b8055024c4aa9b041943aa4e85bdd773
+  // Issue: https://www.reddit.com/r/raylib/comments/1d8m52k/question_why_does_including_raymathh_make_my
+#ifdef near
+#undef near
+#endif
+#ifdef far
+#undef far
+#endif
 #include <raymath.h>
 }
 
