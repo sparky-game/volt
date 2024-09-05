@@ -3,11 +3,11 @@
 
 namespace volt::core {
   VFS::VFS(void) noexcept {
-    VOLT_LOG_INFO("volt::core::VFS :: created successfully");
+    VOLT_LOG_INFO("VFS: created successfully");
   }
 
   VFS::~VFS(void) noexcept {
-    VOLT_LOG_INFO("volt::core::~VFS :: destroyed successfully");
+    VOLT_LOG_INFO("VFS: destroyed successfully");
   }
 
   void VFS::Mount(const std::filesystem::path &vpath, const std::filesystem::path &path) noexcept {

@@ -4,11 +4,11 @@
 
 namespace volt::runtime {
   BehaviourSystem::BehaviourSystem(void) {
-    VOLT_LOG_INFO("volt::runtime::BehaviourSystem :: created successfully");
+    VOLT_LOG_INFO("BehaviourSystem: created successfully");
   }
 
   BehaviourSystem::~BehaviourSystem(void) {
-    VOLT_LOG_INFO("volt::runtime::~BehaviourSystem :: destroyed successfully");
+    VOLT_LOG_INFO("BehaviourSystem: destroyed successfully");
   }
 
   void BehaviourSystem::Update(Scene &s) {

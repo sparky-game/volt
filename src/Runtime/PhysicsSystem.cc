@@ -5,11 +5,11 @@
 
 namespace volt::runtime {
   PhysicsSystem::PhysicsSystem(void) {
-    VOLT_LOG_INFO("volt::runtime::PhysicsSystem :: created successfully");
+    VOLT_LOG_INFO("PhysicsSystem: created successfully");
   }
 
   PhysicsSystem::~PhysicsSystem(void) {
-    VOLT_LOG_INFO("volt::runtime::~PhysicsSystem :: destroyed successfully");
+    VOLT_LOG_INFO("PhysicsSystem: destroyed successfully");
   }
 
   void PhysicsSystem::Update(Scene &s) {

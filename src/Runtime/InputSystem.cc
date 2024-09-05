@@ -5,11 +5,11 @@
 
 namespace volt::runtime {
   InputSystem::InputSystem(void) {
-    VOLT_LOG_INFO("volt::runtime::InputSystem :: created successfully");
+    VOLT_LOG_INFO("InputSystem: created successfully");
   }
 
   InputSystem::~InputSystem(void) {
-    VOLT_LOG_INFO("volt::runtime::~InputSystem :: destroyed successfully");
+    VOLT_LOG_INFO("InputSystem: destroyed successfully");
   }
 
   void InputSystem::Update(Scene &s) {

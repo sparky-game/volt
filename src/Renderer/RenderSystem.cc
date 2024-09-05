@@ -11,11 +11,11 @@ namespace volt::renderer {
       m_editorLayer = std::make_optional<EditorLayer>();
       m_editorLayer->Setup();
     }
-    VOLT_LOG_INFO("volt::renderer::RenderSystem :: created successfully");
+    VOLT_LOG_INFO("RenderSystem: created successfully");
   }
 
   RenderSystem::~RenderSystem(void) {
-    VOLT_LOG_INFO("volt::renderer::~RenderSystem :: destroyed successfully");
+    VOLT_LOG_INFO("RenderSystem: destroyed successfully");
   }
 
   void RenderSystem::Update(runtime::Scene &s) {

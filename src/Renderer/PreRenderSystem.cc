@@ -5,11 +5,11 @@
 
 namespace volt::renderer {
   PreRenderSystem::PreRenderSystem(const RenderSystem &renderer) : m_renderer{renderer} {
-    VOLT_LOG_INFO("volt::renderer::PreRenderSystem :: created successfully");
+    VOLT_LOG_INFO("PreRenderSystem: created successfully");
   }
 
   PreRenderSystem::~PreRenderSystem(void) {
-    VOLT_LOG_INFO("volt::renderer::~PreRenderSystem :: destroyed successfully");
+    VOLT_LOG_INFO("PreRenderSystem: destroyed successfully");
   }
 
   void PreRenderSystem::Update(runtime::Scene &s) {
