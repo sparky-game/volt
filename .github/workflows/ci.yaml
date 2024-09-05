@@ -45,11 +45,11 @@ jobs:
         with:
           submodules: recursive
       - name: install-dependencies
-        run: >
-          sudo apt-get install -y
-            libxcursor-dev
-            libxrandr-dev
-            libxinerama-dev
+        run: |
+          sudo apt-get install -y \
+            libxcursor-dev        \
+            libxrandr-dev         \
+            libxinerama-dev       \
             libxi-dev
       - name: setup-codeql
         uses: github/codeql-action/init@v3
@@ -59,10 +59,10 @@ jobs:
             paths-ignore: [vendor]
       - name: configure
         run: >
-          cmake
-            -B build
-            -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
-            -DCMAKE_C_COMPILER=${{ matrix.c-compiler }}
+          cmake                                         \
+            -B build                                    \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
+            -DCMAKE_C_COMPILER=${{ matrix.c-compiler }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx-compiler }}
       - name: build
         run: cmake --build build
