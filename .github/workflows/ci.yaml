@@ -58,7 +58,7 @@ jobs:
           config: |
             paths-ignore: [vendor]
       - name: configure
-        run: >
+        run: |
           cmake                                         \
             -B build                                    \
             -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
