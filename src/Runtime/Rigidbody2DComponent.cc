@@ -4,17 +4,13 @@
 #include "Rigidbody2DComponent.hh"
 
 namespace volt::runtime {
-  Rigidbody2DComponent::Rigidbody2DComponent(void)
-    : velocity{0, 0}
-  {}
-
-  Rigidbody2DComponent::Rigidbody2DComponent(float vel_x, float vel_y)
-    : velocity{vel_x, vel_y}
+  Rigidbody2DComponent::Rigidbody2DComponent(const core::Vector2<float> &v)
+    : velocity{v}
   {}
 
   void Rigidbody2DComponent::Serialize(YAML::Emitter &out) {
     out << YAML::Key << Rigidbody2DComponent::cmp_name << YAML::BeginMap;
-    out << YAML::Key << "Velocity" << YAML::Value << fmt::format("({:.3f}, {:.3f})", velocity.X(), velocity.Y());
+    out << YAML::Key << "Velocity" << YAML::Value << velocity.ToString();
     out << YAML::EndMap;
   }
 

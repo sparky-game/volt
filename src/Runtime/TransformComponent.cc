@@ -10,7 +10,7 @@ namespace volt::runtime {
 
   void TransformComponent::Serialize(YAML::Emitter &out) {
     out << YAML::Key << TransformComponent::cmp_name << YAML::BeginMap;
-    out << YAML::Key << "Position" << YAML::Value << fmt::format("({:.3f}, {:.3f})", position.X(), position.Y());
+    out << YAML::Key << "Position" << YAML::Value << position.ToString();
     out << YAML::Key << "Rotation" << YAML::Value << fmt::format("{:.3f}", rotation);
     out << YAML::Key << "Scale" << YAML::Value << fmt::format("{:.3f}", scale);
     out << YAML::EndMap;
