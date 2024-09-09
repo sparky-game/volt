@@ -40,7 +40,7 @@ namespace volt::renderer {
                    {pos_x, pos_y, tex_width * sr.scale, tex_height * sr.scale},
                    {(tex_width / 2) * sr.scale, (tex_height / 2) * sr.scale},
                    sr.rotation,
-                   WHITE);
+                   GetColor(sr.color));
     if (m_spec.is_editor) {
       // TODO: this circle is provisional, replace it with a gizmo to move, rotate and scale it.
       DrawCircle(pos_x, pos_y, 4, RED);

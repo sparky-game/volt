@@ -29,19 +29,19 @@ namespace volt::runtime {
                      func_name, TransformComponent::cmp_name);
       return false;
     }
+    position.X(position_tmp_x);
+    position.Y(position_tmp_y);
     if (1 != std::sscanf(rotation_serialized.c_str(), "%f", &rotation_tmp)) {
       VOLT_LOG_ERROR("{} :: `{}.Rotation` value format not valid",
                      func_name, TransformComponent::cmp_name);
       return false;
     }
+    rotation = rotation_tmp;
     if (1 != std::sscanf(scale_serialized.c_str(), "%f", &scale_tmp)) {
       VOLT_LOG_ERROR("{} :: `{}.Scale` value format not valid",
                      func_name, TransformComponent::cmp_name);
       return false;
     }
-    position.X(position_tmp_x);
-    position.Y(position_tmp_y);
-    rotation = rotation_tmp;
     scale = scale_tmp;
     return true;
   }

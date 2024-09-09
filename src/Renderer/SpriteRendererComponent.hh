@@ -8,6 +8,7 @@ namespace volt::renderer {
   struct SpriteRendererComponent : public runtime::IComponent {
     static inline auto cmp_name { "SpriteRenderer" };
     Sprite sprite;
+    uint32_t color;
     core::Vector2<float> position;
     float rotation;
     float scale;
