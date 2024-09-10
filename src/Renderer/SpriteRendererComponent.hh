@@ -12,7 +12,7 @@ namespace volt::renderer {
     core::Vector2<float> position;
     float rotation;
     float scale;
-    SpriteRendererComponent(Sprite &&s) noexcept;
+    SpriteRendererComponent(Sprite &&s, uint32_t c = 0xffffffff) noexcept;
     void Serialize(YAML::Emitter &out) final;
     bool Deserialize(YAML::Node &in) final;
     void Draw(void) final;

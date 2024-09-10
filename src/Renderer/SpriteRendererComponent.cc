@@ -5,8 +5,8 @@
 #include "SpriteRendererComponent.hh"
 
 namespace volt::renderer {
-  SpriteRendererComponent::SpriteRendererComponent(Sprite &&s) noexcept
-    : sprite{std::move(s)}
+  SpriteRendererComponent::SpriteRendererComponent(Sprite &&s, uint32_t c) noexcept
+    : sprite{std::move(s)}, color{c}
   {}
 
   void SpriteRendererComponent::Serialize(YAML::Emitter &out) {
