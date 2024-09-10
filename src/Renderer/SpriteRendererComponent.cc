@@ -55,7 +55,7 @@ namespace volt::renderer {
       catch (const std::runtime_error &) {
         ImGui::TextColored(ImVec4{1, 0.25f, 0.25f, 1}, "Path doesn't resolve to asset");
       }
-      if (ImGui::ColorEdit4("Color", &sprite_color.x)) {
+      if (ImGui::ColorEdit4("Color", &sprite_color.x, ImGuiColorEditFlags_AlphaBar)) {
         Vector4 c {sprite_color.x * 255, sprite_color.y * 255, sprite_color.z * 255, sprite_color.w * 255};
         color = (std::lround(c.x) << 24) | (std::lround(c.y) << 16) | (std::lround(c.z) << 8) | std::lround(c.w);
       }
