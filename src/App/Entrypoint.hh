@@ -23,6 +23,7 @@
 
 // App
 #include "AppSpec.hh"
+#include "Goodbye.hh"
 #include "IAppBackend.hh"
 
 extern volt::app::IAppBackend *CreateVoltApp(void);
@@ -30,6 +31,8 @@ extern volt::app::IAppBackend *CreateVoltApp(void);
 int main(void) {
   volt::core::LogSystem::Init();
   volt::core::VFS vfs;
+
+  volt::app::Goodbye::Init();
 
   auto *app { CreateVoltApp() };
   auto app_spec { app->Init() };
@@ -48,7 +51,7 @@ int main(void) {
   app->Start(scene);
   if (not renderer.IsEditor()) scene.Play();
 
-  while (renderer.IsRunning()) {
+  while (renderer.IsRunning() and volt::app::Goodbye::IsAlive()) {
     auto t { volt::core::GetTimepoint() };
     if (scene.IsRunning()) {
       input.Update(scene);
