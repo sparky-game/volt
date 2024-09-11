@@ -9,6 +9,7 @@ namespace volt::renderer {
     static inline auto cmp_name { "SpriteRenderer" };
     Sprite sprite;
     uint32_t color;
+    bool flipX { false }, flipY { false };
     core::Vector2<float> position;
     float rotation;
     float scale;

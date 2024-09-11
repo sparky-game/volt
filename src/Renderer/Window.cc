@@ -36,7 +36,7 @@ namespace volt::renderer {
     float tex_width = sr.sprite.data().width, tex_height = sr.sprite.data().height;
     float pos_x = sr.position.X() + (tex_width / 2), pos_y = sr.position.Y() + (tex_height / 2);
     DrawTexturePro(sr.sprite.data(),
-                   {0, 0, tex_width, tex_height},
+                   {0, 0, sr.flipX ? -tex_width : tex_width, sr.flipY ? -tex_height : tex_height},
                    {pos_x, pos_y, tex_width * sr.scale, tex_height * sr.scale},
                    {(tex_width / 2) * sr.scale, (tex_height / 2) * sr.scale},
                    sr.rotation,

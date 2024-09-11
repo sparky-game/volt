@@ -13,6 +13,8 @@ namespace volt::renderer {
     out << YAML::Key << SpriteRendererComponent::cmp_name << YAML::BeginMap;
     out << YAML::Key << "Sprite" << YAML::Value << (sprite.name().empty() ? "default" : sprite.name());
     out << YAML::Key << "Color" << YAML::Value << fmt::format("{:#x}", color);
+    out << YAML::Key << "FlipX" << YAML::Value << flipX;
+    out << YAML::Key << "FlipY" << YAML::Value << flipY;
     out << YAML::EndMap;
   }
 
@@ -31,6 +33,18 @@ namespace volt::renderer {
       return false;
     }
     color = color_tmp;
+    try { flipX = in["FlipX"].as<bool>(); }
+    catch (const YAML::TypedBadConversion<bool> &) {
+      VOLT_LOG_ERROR("{} :: `{}.FlipX` value format not valid",
+                     func_name, SpriteRendererComponent::cmp_name);
+      return false;
+    }
+    try { flipY = in["FlipY"].as<bool>(); }
+    catch (const YAML::TypedBadConversion<bool> &) {
+      VOLT_LOG_ERROR("{} :: `{}.FlipY` value format not valid",
+                     func_name, SpriteRendererComponent::cmp_name);
+      return false;
+    }
     return true;
   }
 
@@ -59,6 +73,11 @@ namespace volt::renderer {
         Vector4 c {sprite_color.x * 255, sprite_color.y * 255, sprite_color.z * 255, sprite_color.w * 255};
         color = (std::lround(c.x) << 24) | (std::lround(c.y) << 16) | (std::lround(c.z) << 8) | std::lround(c.w);
       }
+      ImGui::Text("Flip");
+      ImGui::SameLine();
+      ImGui::Checkbox("X", &flipX);
+      ImGui::SameLine();
+      ImGui::Checkbox("Y", &flipY);
     }
   }
 }
