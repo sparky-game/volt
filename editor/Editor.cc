@@ -18,12 +18,12 @@ struct Editor : public volt::app::IAppBackend {
 
   void Start(volt::runtime::Scene &s) final {
     volt::runtime::SceneSerializer ss { &s };
-    ss.Deserialize("scene.vsc");
+    ss.Deserialize("scene.yaml");
   }
 
   void Stop(volt::runtime::Scene &s) final {
     volt::runtime::SceneSerializer ss { &s };
-    ss.Serialize("scene.vsc");
+    ss.Serialize("scene.yaml");
   }
 };
 
