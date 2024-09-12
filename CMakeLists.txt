@@ -15,7 +15,7 @@ project(
   HOMEPAGE_URL "https://github.com/sparky-game/volt"
   LANGUAGES    C CXX
 )
-set(CMAKE_PROJECT_VERSION 0.1-alpha)
+set(CMAKE_PROJECT_VERSION 0.2-alpha)
 
 volt_set_c_compiler_options()
 volt_set_cxx_compiler_options()
