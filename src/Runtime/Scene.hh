@@ -41,6 +41,7 @@ namespace volt::runtime {
     Scene(Scene &&) = delete;
     Scene &operator=(const Scene &) = delete;
     Scene &operator=(Scene &&) = delete;
+    ~Scene(void);
     Entity CreateEntity(const std::string &name = std::string());
     Entity CreateEntity(core::SnowflakeID id, const std::string &name = std::string());
     void DestroyEntity(Entity e);

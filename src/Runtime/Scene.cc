@@ -11,6 +11,11 @@ namespace volt::runtime {
     : m_name{name}, m_running{false}
   {}
 
+  Scene::~Scene(void) {
+    m_registry.clear();
+    VOLT_LOG_INFO("Scene: destroyed successfully");
+  }
+
   Entity Scene::CreateEntity(const std::string &name) {
     return CreateEntity(core::SnowflakeID(), name);
   }
