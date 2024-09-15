@@ -79,6 +79,12 @@ The documentation of /Volt/ includes:
 
 * Usage
 
+/Volt/ is first and foremost a *statically linked library* that acts as the engine itself.
+
+(...)
+
+It also provides a builtin application that acts as the official *editor*, where you can customize every aspect of your project, debug it, build it and ship it to the end user.
+
 (...)
 
 * Build from source
@@ -104,15 +110,21 @@ git submodule update --init --recursive
 
 ** Configuration
 
-(...)
+This project uses *CMake* as its build system, so make sure to have it installed and available to use before proceeding.
 
 #+begin_src sh
-cmake -B build [-DCMAKE_BUILD_TYPE=Debug]
+cmake -B build [-D...]
 #+end_src
+
+If wanted to *debug* /Volt/ as part of the development process, we can use the ~CMAKE_BUILD_TYPE~ variable to target the /Debug/ build type (its set to /Release/ by default). Note that this procedure only applies to *single-configuration generators*; if that isn't your case (i.e. /Ninja Multi-Config/, /Visual Studio/, /Xcode/, etc.), you can already change between build types without worrying about it.
+
+Both *C and C++ compilers* can be manually specified by using the ~CMAKE_C_COMPILER~ and ~CMAKE_CXX_COMPILER~ variables. By default, the project gives priority to /Clang/ ahead of other compilers.
+
+If *cross-compiling* is our thing, we can use the ~CMAKE_TOOLCHAIN_FILE~ variable to specify the target we want to build /Volt/ for (e.g. ~cmake/cross/mingw-x86_64.cmake~ to cross-compile to /MinGW x86_64/ target, i.e. /Win64/).
 
 ** Compilation and linkage
 
-(...)
+This step is orchestrated by the native build tool. After the project has been configured and build files have been generated, the only thing left is to compile and link all defined targets of /Volt/.
 
 #+begin_src sh
 cmake --build build
