@@ -1,7 +1,22 @@
 set(CMAKE_SYSTEM_NAME Windows)
-set(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc)
-set(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
+
+find_program(VOLT_CROSS_C_COMPILER x86_64-w64-mingw32-gcc)
+if (NOT VOLT_CROSS_C_COMPILER)
+  message(FATAL_ERROR "`x86_64-w64-mingw32-gcc` not found")
+endif()
+set(CMAKE_C_COMPILER "${VOLT_CROSS_C_COMPILER}")
+
+find_program(VOLT_CROSS_CXX_COMPILER x86_64-w64-mingw32-g++)
+if (NOT VOLT_CROSS_CXX_COMPILER)
+  message(FATAL_ERROR "`x86_64-w64-mingw32-g++` not found")
+endif()
+set(CMAKE_CXX_COMPILER "${VOLT_CROSS_CXX_COMPILER}")
+
+if (NOT IS_DIRECTORY /usr/x86_64-w64-mingw32)
+  message(FATAL_ERROR "`/usr/x86_64-w64-mingw32` not found")
+endif()
 set(CMAKE_FIND_ROOT_PATH /usr/x86_64-w64-mingw32)
+
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
