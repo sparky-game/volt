@@ -67,16 +67,16 @@ jobs:
       - name: run-codeql
         uses: github/codeql-action/analyze@v3
         with:
-          output: sarif-results
+          output: codeql-results.d
           upload: failure-only
       - name: filter-codeql
         uses: advanced-security/filter-sarif@v1
         with:
           patterns: |
             -vendor/*
-          input: sarif-results/c-cpp.sarif
-          output: sarif-results/c-cpp.sarif
+          input: codeql-results.d/cpp.sarif
+          output: codeql-results.d/cpp.sarif
       - name: upload-codeql
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: sarif-results/c-cpp.sarif
+          sarif_file: codeql-results.d/cpp.sarif
