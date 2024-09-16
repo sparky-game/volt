@@ -18,7 +18,7 @@
 
 namespace volt::core {
   void LogSystem::Init(void) {
-    spdlog::set_pattern("%^[%Y-%m-%dT%X%z] %v%$");
+    spdlog::set_pattern("[%Y-%m-%dT%X%z] %^%v%$");
     s_logger = spdlog::stdout_color_mt("volt");
     s_logger->set_level(spdlog::level::debug);
     s_logger->info("Volt version {} ({}) {} {}", XSTR(VOLT_VERSION), CXX_VERSION, __DATE__, __TIME__);
