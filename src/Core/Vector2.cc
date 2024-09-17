@@ -40,14 +40,6 @@ namespace volt::core {
   }
 
   template <typename T>
-  constexpr Vector2<T> Vector2<T>::operator*(const T s) const noexcept {
-    return {
-      m_x * s,
-      m_y * s
-    };
-  }
-
-  template <typename T>
   constexpr Vector2<T> Vector2<T>::operator/(const T s) const noexcept {
     return {
       m_x / s,

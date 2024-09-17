@@ -39,6 +39,19 @@ namespace volt::core {
     constexpr T Length(void) const noexcept;
     constexpr Vector2 Normalize(void) const noexcept;
     /**
+     * @brief Rotates the vector by the specified rotation value (in degrees).
+     * @param angle The rotation to apply.
+     * @return The rotated vector.
+     */
+    inline constexpr Vector2 Rotate(float angle) const noexcept {
+      float rads = angle * (std::numbers::pi / 180);
+      float cos { std::cos(rads) }, sin { std::sin(rads) };
+      return {
+        (m_x * cos) - (m_y * sin),
+        (m_x * sin) + (m_y * cos)
+      };
+    }
+    /**
      * @brief Returns the string representation of the vector using default formatting.
      * @return The string representation of the vector.
      */
@@ -91,7 +104,17 @@ namespace volt::core {
     inline constexpr void operator+=(const Vector2 &v) noexcept { *this = *this + v; }
     constexpr Vector2 operator-(const Vector2 &v) const noexcept;
     constexpr T operator*(const Vector2 &v) const noexcept;
-    constexpr Vector2 operator*(const T s) const noexcept;
+    /**
+     * @brief Multiples the vector by the specified scalar value.
+     * @param s The scalar value.
+     * @return The scaled vector.
+     */
+    inline constexpr Vector2 operator*(const T s) const noexcept {
+      return {
+        m_x * s,
+        m_y * s
+      };
+    }
     constexpr Vector2 operator/(const T s) const noexcept;
     friend inline constexpr Vector2 operator*(const T s, const Vector2 &v) noexcept { return v * s; }
     friend inline constexpr Vector2 operator/(const T s, const Vector2 &v) noexcept { return v / s; }
