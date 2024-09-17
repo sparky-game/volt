@@ -12,6 +12,6 @@ namespace volt::runtime {
     uint16_t left  { KEY_A };
     uint16_t down  { KEY_S };
     uint16_t right { KEY_D };
-    float impulse  { 4.0f  };
+    float impulse  { 250   };
   };
 }
