@@ -26,6 +26,8 @@ namespace volt::runtime {
     void RemoveComponent(void);
     template <typename T>
     T &GetComponent(void) const;
+    template <typename T>
+    T *TryGetComponent(void) const;
     inline operator EID(void) const noexcept { return m_id; }
   };
 
@@ -83,5 +85,11 @@ namespace volt::runtime {
   inline T &Entity::GetComponent(void) const {
     assert(HasComponent<T>());
     return m_scene->m_registry.get<T>(m_id);
+  }
+
+  template <typename T>
+  inline T *Entity::TryGetComponent(void) const {
+    if (not HasComponent<T>()) return nullptr;
+    return &GetComponent<T>();
   }
 }
