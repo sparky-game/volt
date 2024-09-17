@@ -8,4 +8,6 @@ namespace volt::core {
   Timepoint GetTimepoint(void);
 
   uint64_t GetTimepointEpoch(void);
+
+  float GetDeltaTime(void);
 }
