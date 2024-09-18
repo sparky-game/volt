@@ -5,6 +5,10 @@
 #include "Rigidbody2DComponent.hh"
 
 namespace volt::runtime {
+  bool GetMouseButtonDown(uint8_t button) {
+    return IsMouseButtonDown(button);
+  }
+
   InputSystem::InputSystem(void) {
     VOLT_LOG_INFO("InputSystem: created successfully");
   }

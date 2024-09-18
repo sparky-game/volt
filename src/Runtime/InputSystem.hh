@@ -3,6 +3,8 @@
 #include "Scene.hh"
 
 namespace volt::runtime {
+  bool GetMouseButtonDown(uint8_t button);
+
   struct InputSystem {
     InputSystem(void);
     InputSystem(const InputSystem &) = delete;
