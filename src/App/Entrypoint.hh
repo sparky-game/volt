@@ -43,10 +43,8 @@ int main(void) {
   volt::runtime::PhysicsSystem physics;
   volt::runtime::InputSystem input;
 
-  volt::runtime::Project proj {{
-      .name = app_spec.renderer.name,
-      .path = "."
-    }};
+  volt::runtime::Project proj { app_spec.project };
+
   auto &scene { *proj.CreateScene("Main") };
   app->Start(scene);
   if (not renderer.IsEditor()) scene.Play();

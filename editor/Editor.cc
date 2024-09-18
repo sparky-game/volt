@@ -3,15 +3,21 @@
 #define XSTR(s) STR(s)
 #define STR(s) #s
 
+#define NAME "Volt v" XSTR(VOLT_VERSION)
+
 struct Editor : public volt::app::IAppBackend {
   volt::app::AppSpec Init(void) final {
     return {
       .renderer {
         .width     = 1280,
         .height    = 720,
-        .name      = "Volt v" XSTR(VOLT_VERSION),
+        .name      = NAME,
         .max_fps   = 75,
         .is_editor = true
+      },
+      .project {
+        .name = NAME,
+        .path = "."
       }
     };
   }
