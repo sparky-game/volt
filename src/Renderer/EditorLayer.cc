@@ -38,13 +38,13 @@ namespace volt::renderer {
         if (ImGui::Button("Pause")) {
           s.Pause();
         }
+        ImGui::SameLine();
+        if (ImGui::Button("Stop")) {
+          s.Stop();
+        }
       }
       else if (ImGui::Button("Play")) {
         s.Play();
-      }
-      ImGui::SameLine();
-      if (ImGui::Button("Stop")) {
-        s.Stop();
       }
     }
     ImGui::End();
