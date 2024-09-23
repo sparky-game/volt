@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
+
+include(CMakeDependentOption)
 include(cmake/build_type.cmake)
 include(cmake/c_compiler.cmake)
+include(cmake/volt_options.cmake)
 include(cmake/cxx_compiler.cmake)
 include(cmake/c_compiler_options.cmake)
 include(cmake/cxx_compiler_options.cmake)
@@ -19,6 +22,7 @@ set(CMAKE_PROJECT_VERSION 0.2-alpha)
 
 volt_set_c_compiler_options()
 volt_set_cxx_compiler_options()
+volt_set_options()
 
 message(STATUS "The requested build target is ${CMAKE_SYSTEM}")
 
