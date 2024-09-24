@@ -1,6 +1,8 @@
 #include "Scene.hh"
 #include "../Core/LogSystem.hh"
 #include "TransformComponent.hh"
+#include "Rigidbody2DComponent.hh"
+#include "../Renderer/SpriteRendererComponent.hh"
 
 namespace volt::runtime {
   Entity::Entity(EID id, Scene *scene)
@@ -52,6 +54,24 @@ namespace volt::runtime {
 
   void Scene::Play(void) noexcept {
     if (not m_running) m_running = true;
+    // Box2D physics world creation
+    b2WorldDef worldDef = b2DefaultWorldDef();
+    worldDef.gravity = {0.0f, 9.81f};
+    m_worldID = b2CreateWorld(&worldDef);
+    // Box2D body creation of all entities with Rigidbody2D
+    ForAll<TransformComponent, Rigidbody2DComponent, renderer::SpriteRendererComponent>([this](auto, auto &t, auto &rb, auto &sr) {
+      rb.SetExtent({sr.scale * sr.sprite.width() * 0.5f, sr.scale * sr.sprite.height() * 0.5f});
+      b2BodyDef bodyDef { b2DefaultBodyDef() };
+      bodyDef.type = static_cast<b2BodyType>(rb.type);
+      bodyDef.gravityScale = rb.gravityScale;
+      bodyDef.fixedRotation = rb.fixedRotation;
+      bodyDef.position = {t.position.X(), t.position.Y()};
+      bodyDef.rotation = b2MakeRot(t.rotation * DEG2RAD);
+      rb.SetBodyID(b2CreateBody(m_worldID, &bodyDef));
+      b2Polygon polygon { b2MakeBox(rb.GetExtent().x, rb.GetExtent().y) };
+      b2ShapeDef shapeDef { b2DefaultShapeDef() };
+      b2CreatePolygonShape(rb.GetBodyID(), &shapeDef, &polygon);
+    });
   }
 
   void Scene::Pause(void) noexcept {
@@ -61,5 +81,6 @@ namespace volt::runtime {
   void Scene::Stop(void) noexcept {
     Pause();
     // TODO: figure out how to reset/rewind the scene
+    b2DestroyWorld(m_worldID);
   }
 }
