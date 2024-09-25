@@ -1,10 +1,14 @@
 #include "Scene.hh"
+#include <unordered_map>
 #include "../Core/LogSystem.hh"
 #include "TransformComponent.hh"
 #include "Rigidbody2DComponent.hh"
 #include "../Renderer/SpriteRendererComponent.hh"
 
 namespace volt::runtime {
+  static std::unordered_map<core::SnowflakeID::value_type, core::Vector2<float>> initial_positions;
+  static std::unordered_map<core::SnowflakeID::value_type, float> initial_rotations;
+
   Entity::Entity(EID id, Scene *scene)
     : m_id{id}, m_scene{scene}
   {}
@@ -59,7 +63,7 @@ namespace volt::runtime {
     worldDef.gravity = {0.0f, 9.81f};
     m_worldID = b2CreateWorld(&worldDef);
     // Box2D body creation of all entities with Rigidbody2D
-    ForAll<TransformComponent, Rigidbody2DComponent, renderer::SpriteRendererComponent>([this](auto, auto &t, auto &rb, auto &sr) {
+    ForAll<TransformComponent, Rigidbody2DComponent, renderer::SpriteRendererComponent>([this](auto e, auto &t, auto &rb, auto &sr) {
       rb.SetExtent({sr.scale * sr.sprite.width() * 0.5f, sr.scale * sr.sprite.height() * 0.5f});
       b2BodyDef bodyDef { b2DefaultBodyDef() };
       bodyDef.type = static_cast<b2BodyType>(rb.type);
@@ -71,6 +75,9 @@ namespace volt::runtime {
       b2Polygon polygon { b2MakeBox(rb.GetExtent().x, rb.GetExtent().y) };
       b2ShapeDef shapeDef { b2DefaultShapeDef() };
       b2CreatePolygonShape(rb.GetBodyID(), &shapeDef, &polygon);
+      // Save initial position and rotation
+      initial_positions[e.GetID()] = t.position;
+      initial_rotations[e.GetID()] = t.rotation;
     });
   }
 
@@ -81,6 +88,12 @@ namespace volt::runtime {
   void Scene::Stop(void) noexcept {
     Pause();
     // TODO: figure out how to reset/rewind the scene
+    // Maybe iterate both hashmaps and ...
+    for (auto &[id, pos] : initial_positions) {
+      auto &t { FindEntityByID(id)->GetComponent<TransformComponent>() };
+      t.position = pos;
+      t.rotation = initial_rotations[id];
+    }
     b2DestroyWorld(m_worldID);
   }
 }
