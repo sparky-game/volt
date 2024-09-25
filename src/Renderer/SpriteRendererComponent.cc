@@ -56,11 +56,6 @@ namespace volt::renderer {
       size_t len { std::min(sprite.name().size(), sprite_path.size() - 1) };
       std::copy_n(sprite.name().begin(), len, sprite_path.begin());
       sprite_path[len] = 0;
-      Vector4 c { ColorNormalize(GetColor(color)) };
-      sprite_color.x = c.x;
-      sprite_color.y = c.y;
-      sprite_color.z = c.z;
-      sprite_color.w = c.w;
       is_first_time = false;
     }
     if (ImGui::CollapsingHeader(SpriteRendererComponent::cmp_name)) {
@@ -69,6 +64,11 @@ namespace volt::renderer {
       catch (const std::runtime_error &) {
         ImGui::TextColored(ImVec4{1, 0.25f, 0.25f, 1}, "Path doesn't resolve to asset");
       }
+      Vector4 c { ColorNormalize(GetColor(color)) };
+      sprite_color.x = c.x;
+      sprite_color.y = c.y;
+      sprite_color.z = c.z;
+      sprite_color.w = c.w;
       if (ImGui::ColorEdit4("Color", &sprite_color.x, ImGuiColorEditFlags_AlphaBar)) {
         Vector4 c {sprite_color.x * 255, sprite_color.y * 255, sprite_color.z * 255, sprite_color.w * 255};
         color = (std::lround(c.x) << 24) | (std::lround(c.y) << 16) | (std::lround(c.z) << 8) | std::lround(c.w);
