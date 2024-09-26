@@ -14,7 +14,7 @@ namespace volt::runtime {
   {}
 
   Scene::Scene(const std::string &name)
-    : m_name{name}, m_running{false}
+    : m_name{name}, m_running{false}, m_paused{false}
   {}
 
   Scene::~Scene(void) {
@@ -59,9 +59,11 @@ namespace volt::runtime {
   void Scene::Play(void) noexcept {
     if (not m_running) m_running = true;
     // Box2D physics world creation
-    b2WorldDef worldDef = b2DefaultWorldDef();
-    worldDef.gravity = {0.0f, 9.81f};
-    m_worldID = b2CreateWorld(&worldDef);
+    if (not m_paused) {
+      b2WorldDef worldDef = b2DefaultWorldDef();
+      worldDef.gravity = {0.0f, 9.81f};
+      m_worldID = b2CreateWorld(&worldDef);
+    }
     // Box2D body creation of all entities with Rigidbody2D
     ForAll<TransformComponent, Rigidbody2DComponent, renderer::SpriteRendererComponent>([this](auto e, auto &t, auto &rb, auto &sr) {
       rb.SetExtent({sr.scale * sr.sprite.width() * 0.5f, sr.scale * sr.sprite.height() * 0.5f});
@@ -75,20 +77,23 @@ namespace volt::runtime {
       b2Polygon polygon { b2MakeBox(rb.GetExtent().x, rb.GetExtent().y) };
       b2ShapeDef shapeDef { b2DefaultShapeDef() };
       b2CreatePolygonShape(rb.GetBodyID(), &shapeDef, &polygon);
-      // Save initial position and rotation
-      initial_positions[e.GetID()] = t.position;
-      initial_rotations[e.GetID()] = t.rotation;
+      // Save initial position and rotation (if wasn't in paused state, to not overwrite actual initial values)
+      if (not m_paused) {
+        initial_positions[e.GetID()] = t.position;
+        initial_rotations[e.GetID()] = t.rotation;
+      }
     });
+    if (m_paused) m_paused = false;
   }
 
   void Scene::Pause(void) noexcept {
     if (m_running) m_running = false;
+    if (not m_paused) m_paused = true;
   }
 
   void Scene::Stop(void) noexcept {
-    Pause();
-    // TODO: figure out how to reset/rewind the scene
-    // Maybe iterate both hashmaps and ...
+    if (m_running) m_running = false;
+    if (m_paused) m_paused = false;
     for (auto &[id, pos] : initial_positions) {
       auto &t { FindEntityByID(id)->GetComponent<TransformComponent>() };
       t.position = pos;

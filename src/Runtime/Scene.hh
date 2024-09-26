@@ -36,6 +36,7 @@ namespace volt::runtime {
     friend class Entity;
     std::string m_name;
     bool m_running;
+    bool m_paused;
     ECS_t m_registry;
     b2WorldId m_worldID;
     std::unordered_map<core::SnowflakeID::value_type, EID> m_ids;
