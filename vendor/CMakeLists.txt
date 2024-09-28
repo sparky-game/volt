@@ -38,3 +38,7 @@ if (VOLT_USE_AVX2)
     target_compile_options(box2d PRIVATE "-mavx2")
   endif()
 endif()
+
+if (APPLE)
+  target_compile_options(raylib PRIVATE "-ObjC")
+endif()
