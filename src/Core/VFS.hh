@@ -4,6 +4,16 @@
 #include <filesystem>
 #include <unordered_map>
 
+#if defined(__APPLE__) && defined(__MACH__)
+// NOTE: only tested on `macOS 10.15.7 (Catalina) 19H15 x86_64` + `AppleClang 12.0.0`
+template <>
+struct std::hash<std::filesystem::path> {
+  std::size_t operator()(const std::filesystem::path &p) const {
+    return std::hash<std::string>()(p.string());
+  }
+};
+#endif
+
 namespace volt::core {
   class VFS {
     std::unordered_map<std::filesystem::path, std::filesystem::path> m_mountPoints;
