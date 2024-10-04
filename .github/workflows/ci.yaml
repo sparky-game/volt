@@ -3,8 +3,7 @@ name: ci
 on:
   push:
     branches: [master]
-    paths:
-      - '.github/workflows/ci.yaml'
+    paths: ['.github/workflows/ci.yaml']
   pull_request:
     branches: [master]
     types:
@@ -21,6 +20,10 @@ on:
       - 'SECURITY.md'
   schedule:
     - cron: '0 9 * * 5'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   ci:
