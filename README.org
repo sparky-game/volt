@@ -40,6 +40,7 @@ Write games, don't play them
 <img src="https://img.shields.io/badge/speed-%F0%9F%94%A5blazing-blue" alt="Blazing Speed">
 <br/>
 <img src="https://www.bestpractices.dev/projects/9364/badge" alt="OpenSSF Best Practices">
+<img src="https://api.scorecard.dev/projects/github.com/sparky-game/volt/badge" alt="OpenSSF Scorecard">
 </p>
 #+end_html
 
@@ -47,6 +48,7 @@ Write games, don't play them
 #+begin_html
 <p align="center">
 <img src="https://github.com/sparky-game/volt/actions/workflows/ci.yaml/badge.svg" alt="CI">
+<img src="https://github.com/sparky-game/volt/actions/workflows/security-analysis.yaml/badge.svg" alt="Security Analysis">
 </p>
 #+end_html
 
