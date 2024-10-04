@@ -61,6 +61,8 @@ int main(void) {
     renderer.WaitIdle(t);
   }
 
+  if (scene.IsRunning()) scene.Stop();
+
   app->Stop(scene);
   delete app;
 }
