@@ -3,11 +3,6 @@
 
 namespace volt::core {
   template <typename T>
-  constexpr T Vector2<T>::Dot(const Vector2 &v) const noexcept {
-    return (m_x * v.m_x) + (m_y * v.m_y);
-  }
-
-  template <typename T>
   constexpr T Vector2<T>::LengthSquared(void) const noexcept {
     return Dot(*this);
   }
@@ -25,18 +20,8 @@ namespace volt::core {
   }
 
   template <typename T>
-  constexpr T Vector2<T>::Dot(const Vector2 &u, const Vector2 &v) noexcept {
-    return u.Dot(v);
-  }
-
-  template <typename T>
   constexpr Vector2<T> Vector2<T>::operator-(const Vector2 &v) const noexcept {
     return *this + (-1 * v);
-  }
-
-  template <typename T>
-  constexpr T Vector2<T>::operator*(const Vector2 &v) const noexcept {
-    return Dot(v);
   }
 
   template <typename T>

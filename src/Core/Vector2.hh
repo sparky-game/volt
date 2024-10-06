@@ -11,10 +11,26 @@ namespace volt::core {
   public:
     constexpr Vector2(void) = default;
     inline constexpr Vector2(T x, T y) noexcept : m_x{x}, m_y{y} {}
+    /**
+     * @brief Get the X component of the vector.
+     * @return The X component of the vector.
+     */
     inline constexpr T X(void) const noexcept { return m_x; }
-    inline constexpr void X(T x) noexcept     { m_x = x;    }
+    /**
+     * @brief Set the X component of the vector.
+     * @param x New X value.
+     */
+    inline constexpr void X(T x) noexcept { m_x = x; }
+    /**
+     * @brief Get the Y component of the vector.
+     * @return The Y component of the vector.
+     */
     inline constexpr T Y(void) const noexcept { return m_y; }
-    inline constexpr void Y(T y) noexcept     { m_y = y;    }
+    /**
+     * @brief Set the Y component of the vector.
+     * @param y New Y value.
+     */
+    inline constexpr void Y(T y) noexcept { m_y = y; }
     /**
      * @brief Adds two vectors together.
      * @param v The second vector to add.
@@ -27,6 +43,12 @@ namespace volt::core {
       };
     }
     /**
+     * @brief Adds two vectors together.
+     * @param v The second vector to add.
+     * @return The summed vector.
+     */
+    inline constexpr Vector2 operator+(const Vector2 &v) const noexcept { return Add(v); }
+    /**
      * @brief Restricts a vector between a minimum and a maximum value.
      * @param min The minimum value.
      * @param max The maximum value.
@@ -34,7 +56,35 @@ namespace volt::core {
     inline constexpr void Clamp(const Vector2 &min, const Vector2 &max) noexcept {
       *this = Clamp(*this, min, max);
     }
-    constexpr T Dot(const Vector2 &v) const noexcept;
+    /**
+     * @brief Restricts a vector between a minimum and a maximum value.
+     * @param v The vector to restrict.
+     * @param min The minimum value.
+     * @param max The maximum value.
+     * @return The restricted vector.
+     */
+    static inline constexpr Vector2 Clamp(const Vector2 &v, const Vector2 &min, const Vector2 &max) noexcept {
+      return Min(Max(v, min), max);
+    }
+    /**
+     * @brief Returns the dot product of two vectors.
+     * @param v The second vector.
+     * @return The dot product.
+     */
+    inline constexpr T Dot(const Vector2 &v) const noexcept { return (m_x * v.m_x) + (m_y * v.m_y); }
+    /**
+     * @brief Returns the dot product of two vectors.
+     * @param v The second vector.
+     * @return The dot product.
+     */
+    inline constexpr T operator*(const Vector2 &v) const noexcept { return Dot(v); }
+    /**
+     * @brief Returns the dot product of two vectors.
+     * @param u The first vector.
+     * @param v The second vector.
+     * @return The dot product.
+     */
+    inline static constexpr T Dot(const Vector2 &u, const Vector2 &v) noexcept { return u.Dot(v); }
     constexpr T LengthSquared(void) const noexcept;
     constexpr T Length(void) const noexcept;
     constexpr Vector2 Normalize(void) const noexcept;
@@ -59,17 +109,6 @@ namespace volt::core {
       return fmt::format("({:.3f}, {:.3f})", m_x, m_y);
     }
     /**
-     * @brief Restricts a vector between a minimum and a maximum value.
-     * @param v The vector to restrict.
-     * @param min The minimum value.
-     * @param max The maximum value.
-     * @return The restricted vector.
-     */
-    static inline constexpr Vector2 Clamp(const Vector2 &v, const Vector2 &min, const Vector2 &max) noexcept {
-      return Min(Max(v, min), max);
-    }
-    static constexpr T Dot(const Vector2 &u, const Vector2 &v) noexcept;
-    /**
      * @brief Returns a vector whose elements are the maximum of each of the pairs of elements in two specified vectors.
      * @param u The first vector.
      * @param v The second vector.
@@ -93,17 +132,39 @@ namespace volt::core {
         u.m_y < v.m_y ? u.m_y : v.m_y
       };
     }
-    static inline constexpr Vector2 zero(void)  noexcept { return {0, 0};  }
-    static inline constexpr Vector2 left(void)  noexcept { return {-1, 0}; }
-    static inline constexpr Vector2 right(void) noexcept { return {1, 0};  }
-    static inline constexpr Vector2 down(void)  noexcept { return {0, -1}; }
-    static inline constexpr Vector2 up(void)    noexcept { return {0, 1};  }
-    static inline constexpr Vector2 one(void)   noexcept { return {1, 1};  }
+    /**
+     * @brief Returns a vector whose 2 elements are equal to zero.
+     * @return Vector2<>{0, 0}
+     */
+    static inline constexpr Vector2 zero(void) noexcept { return {0, 0}; }
+    /**
+     * @brief Returns a vector which represents -X direction.
+     * @return Vector2<>{-1, 0}
+     */
+    static inline constexpr Vector2 left(void) noexcept { return {-1, 0}; }
+    /**
+     * @brief Returns a vector which represents +X direction.
+     * @return Vector2<>{1, 0}
+     */
+    static inline constexpr Vector2 right(void) noexcept { return {1, 0}; }
+    /**
+     * @brief Returns a vector which represents -Y direction.
+     * @return Vector2<>{0, -1}
+     */
+    static inline constexpr Vector2 down(void) noexcept { return {0, -1}; }
+    /**
+     * @brief Returns a vector which represents +Y direction.
+     * @return Vector2<>{0, 1}
+     */
+    static inline constexpr Vector2 up(void) noexcept { return {0, 1}; }
+    /**
+     * @brief Returns a vector whose 2 elements are equal to one.
+     * @return Vector2<>{1, 1}
+     */
+    static inline constexpr Vector2 one(void) noexcept { return {1, 1}; }
     constexpr auto operator<=>(const Vector2 &) const noexcept = default;
-    inline constexpr Vector2 operator+(const Vector2 &v) const noexcept { return Add(v); }
     inline constexpr void operator+=(const Vector2 &v) noexcept { *this = *this + v; }
     constexpr Vector2 operator-(const Vector2 &v) const noexcept;
-    constexpr T operator*(const Vector2 &v) const noexcept;
     /**
      * @brief Multiples the vector by the specified scalar value.
      * @param s The scalar value.
