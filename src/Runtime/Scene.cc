@@ -64,7 +64,7 @@ namespace volt::runtime {
       m_worldID = b2CreateWorld(&worldDef);
     }
     ForAll<TransformComponent, Rigidbody2DComponent, renderer::SpriteRendererComponent>([this](auto e, auto &t, auto &rb, auto &sr) {
-      rb.SetExtent({sr.scale * sr.sprite.width() * 0.5f, sr.scale * sr.sprite.height() * 0.5f});
+      rb.SetExtent({t.scale * sr.sprite.width() * 0.5f, t.scale * sr.sprite.height() * 0.5f});
       b2BodyDef bodyDef { b2DefaultBodyDef() };
       bodyDef.type = static_cast<b2BodyType>(rb.type);
       bodyDef.gravityScale = rb.gravityScale;
