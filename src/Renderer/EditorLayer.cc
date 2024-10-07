@@ -185,7 +185,7 @@ namespace volt::renderer {
   }
 
   void EditorLayer::Setup(void) const noexcept {
-    static constexpr auto config_filename { "volt.ini" };
+    constexpr auto config_filename { "volt.ini" };
     if (not std::filesystem::exists(config_filename) or not std::filesystem::is_regular_file(config_filename)) {
       if (not ChangeDirectory(GetApplicationDirectory())) {
         VOLT_LOG_WARN("volt::renderer::EditorLayer::Setup :: could not change CWD to Volt's editor binary directory");
