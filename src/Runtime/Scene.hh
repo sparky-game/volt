@@ -18,15 +18,15 @@ namespace volt::runtime {
     Entity(EID id, Scene *scene);
     inline const std::string &GetName(void)          { return GetComponent<TagComponent>().tag; }
     inline core::SnowflakeID::value_type GetID(void) { return static_cast<core::SnowflakeID::value_type>(GetComponent<IDComponent>().id); }
-    template <typename T>
+    template <IComponent_t T>
     bool HasComponent(void) const;
-    template <typename T, typename... Args>
+    template <IComponent_t T, typename... Args>
     T &AddComponent(Args &&... args);
-    template <typename T>
+    template <IComponent_t T>
     void RemoveComponent(void);
-    template <typename T>
+    template <IComponent_t T>
     T &GetComponent(void) const;
-    template <typename T>
+    template <IComponent_t T>
     T *TryGetComponent(void) const;
     inline operator EID(void) const noexcept { return m_id; }
   };
@@ -64,30 +64,30 @@ namespace volt::runtime {
     inline void SetName(const std::string &name) { m_name = name; }
   };
 
-  template <typename T>
+  template <IComponent_t T>
   inline bool Entity::HasComponent(void) const {
     return m_scene->m_registry.any_of<T>(m_id);
   }
 
-  template <typename T, typename... Args>
+  template <IComponent_t T, typename... Args>
   inline T &Entity::AddComponent(Args &&... args) {
     assert(not HasComponent<T>());
     return m_scene->m_registry.emplace<T>(m_id, std::forward<Args>(args)...);
   }
 
-  template <typename T>
+  template <IComponent_t T>
   inline void Entity::RemoveComponent(void) {
     assert(HasComponent<T>());
     m_scene->m_registry.remove<T>(m_id);
   }
 
-  template <typename T>
+  template <IComponent_t T>
   inline T &Entity::GetComponent(void) const {
     assert(HasComponent<T>());
     return m_scene->m_registry.get<T>(m_id);
   }
 
-  template <typename T>
+  template <IComponent_t T>
   inline T *Entity::TryGetComponent(void) const {
     if (not HasComponent<T>()) return nullptr;
     return &GetComponent<T>();

@@ -23,8 +23,7 @@ namespace volt::runtime {
   Entity Scene::CreateEntity(core::SnowflakeID id, const std::string &name) {
     Entity e { m_registry.create(), this };
     e.AddComponent<IDComponent>(id);
-    auto &t { e.AddComponent<TagComponent>() };
-    t.tag = name.empty() ? "Entity" : name;
+    e.AddComponent<TagComponent>(name.empty() ? "Entity" : name);
     e.AddComponent<TransformComponent>();
     m_ids[id] = e;
     VOLT_LOG_INFO("Scene: Entity created [{}|{}]", static_cast<core::SnowflakeID::value_type>(id), name);
