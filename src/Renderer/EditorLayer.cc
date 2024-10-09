@@ -35,17 +35,16 @@ namespace volt::renderer {
   void EditorLayer::drawControls(runtime::Scene &s) noexcept {
     if (ImGui::Begin("Controls", nullptr, ImGuiWindowFlags_NoTitleBar)) {
       if (s.IsRunning()) {
-        if (ImGui::Button("Pause")) {
-          s.Pause();
-        }
+        if (ImGui::Button("Pause")) s.Pause();
+        ImGui::SameLine();
+        if (ImGui::Button("Stop")) s.Stop();
       }
-      else if (ImGui::Button("Play")) {
-        s.Play();
+      else if (s.IsPaused()) {
+        if (ImGui::Button("Play")) s.Play();
+        ImGui::SameLine();
+        if (ImGui::Button("Stop")) s.Stop();
       }
-      ImGui::SameLine();
-      if (ImGui::Button("Stop")) {
-        s.Stop();
-      }
+      else if (ImGui::Button("Play")) s.Play();
     }
     ImGui::End();
   }
@@ -185,7 +184,7 @@ namespace volt::renderer {
   }
 
   void EditorLayer::Setup(void) const noexcept {
-    static constexpr auto config_filename { "volt.ini" };
+    constexpr auto config_filename { "volt.ini" };
     if (not std::filesystem::exists(config_filename) or not std::filesystem::is_regular_file(config_filename)) {
       if (not ChangeDirectory(GetApplicationDirectory())) {
         VOLT_LOG_WARN("volt::renderer::EditorLayer::Setup :: could not change CWD to Volt's editor binary directory");

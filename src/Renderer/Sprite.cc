@@ -34,10 +34,10 @@ namespace volt::renderer {
   {
     // NOTE: leave the rvalue Sprite object in an invalid state (id <= 0), so when it gets destroyed (after it's moved)
     // it doesn't get unloaded from GPU's VRAM (i.e. leave the moved-from object as a hollow object (empty state)).
-    m_width = 0;
-    m_height = 0;
+    s.m_width = 0;
+    s.m_height = 0;
     s.m_data = {};
-    m_name.clear();
+    s.m_name.clear();
   }
 
   Sprite::~Sprite(void) {
