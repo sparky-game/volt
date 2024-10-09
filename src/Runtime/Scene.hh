@@ -60,6 +60,7 @@ namespace volt::runtime {
     std::optional<Entity> FindEntityByID(core::SnowflakeID::value_type id);
     std::optional<Entity> FindEntityByName(const std::string &name);
     inline bool IsRunning(void) const noexcept { return m_running; }
+    inline bool IsPaused(void) const noexcept { return m_paused; }
     void Play(void) noexcept;
     void Pause(void) noexcept;
     void Stop(void) noexcept;

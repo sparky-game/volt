@@ -35,17 +35,16 @@ namespace volt::renderer {
   void EditorLayer::drawControls(runtime::Scene &s) noexcept {
     if (ImGui::Begin("Controls", nullptr, ImGuiWindowFlags_NoTitleBar)) {
       if (s.IsRunning()) {
-        if (ImGui::Button("Pause")) {
-          s.Pause();
-        }
+        if (ImGui::Button("Pause")) s.Pause();
         ImGui::SameLine();
-        if (ImGui::Button("Stop")) {
-          s.Stop();
-        }
+        if (ImGui::Button("Stop")) s.Stop();
       }
-      else if (ImGui::Button("Play")) {
-        s.Play();
+      else if (s.IsPaused()) {
+        if (ImGui::Button("Play")) s.Play();
+        ImGui::SameLine();
+        if (ImGui::Button("Stop")) s.Stop();
       }
+      else if (ImGui::Button("Play")) s.Play();
     }
     ImGui::End();
   }
