@@ -87,6 +87,8 @@ The documentation of /Volt/ includes:
 
 It also provides a builtin application that acts as the official *editor*, where you can customize every aspect of your project, debug it, build it and ship it to the end user.
 
+It's a *WYSIWYG*-style editor (i.e. *What You See Is What You Get*), meaning that everything done in it will be exactly reflected on the final product.
+
 (...)
 
 * Build from source
