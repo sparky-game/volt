@@ -49,26 +49,25 @@ namespace volt::renderer {
   }
 
   void SpriteRendererComponent::Draw(void) {
-    static bool is_first_time { true };
+    static size_t sprite_path_len {0};
     static std::array<char, 32> sprite_path { "default" };
     static ImVec4 sprite_color {1, 1, 1, 1};
-    if (is_first_time) {
-      size_t len { std::min(sprite.name().size(), sprite_path.size() - 1) };
-      std::copy_n(sprite.name().begin(), len, sprite_path.begin());
-      sprite_path[len] = 0;
-      Vector4 c { ColorNormalize(GetColor(color)) };
-      sprite_color.x = c.x;
-      sprite_color.y = c.y;
-      sprite_color.z = c.z;
-      sprite_color.w = c.w;
-      is_first_time = false;
-    }
     if (ImGui::CollapsingHeader(SpriteRendererComponent::cmp_name)) {
+      if (sprite.name() != sprite_path.data()) {
+        sprite_path_len = std::min(sprite.name().size(), sprite_path.size() - 1);
+        std::copy_n(sprite.name().begin(), sprite_path_len, sprite_path.begin());
+        sprite_path[sprite_path_len] = 0;
+      }
       ImGui::InputText("Sprite", sprite_path.data(), sprite_path.size());
       try { sprite.Reset(std::string(sprite_path.data())); }
       catch (const std::runtime_error &) {
         ImGui::TextColored(ImVec4{1, 0.25f, 0.25f, 1}, "Path doesn't resolve to asset");
       }
+      Vector4 c { ColorNormalize(GetColor(color)) };
+      sprite_color.x = c.x;
+      sprite_color.y = c.y;
+      sprite_color.z = c.z;
+      sprite_color.w = c.w;
       if (ImGui::ColorEdit4("Color", &sprite_color.x, ImGuiColorEditFlags_AlphaBar)) {
         Vector4 c {sprite_color.x * 255, sprite_color.y * 255, sprite_color.z * 255, sprite_color.w * 255};
         color = (std::lround(c.x) << 24) | (std::lround(c.y) << 16) | (std::lround(c.z) << 8) | std::lround(c.w);

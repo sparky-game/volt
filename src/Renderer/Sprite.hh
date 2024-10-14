@@ -11,7 +11,7 @@ extern "C" {
 namespace volt::renderer {
   class Sprite {
     uint32_t m_width, m_height;
-    Texture m_data;
+    Texture2D m_data;
     std::string m_name;
     void loadDefaultTexture(void) noexcept;
   public:

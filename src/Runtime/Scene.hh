@@ -2,6 +2,7 @@
 
 #include <optional>
 #include <entt/entt.hpp>
+#include <box2d/box2d.h>
 #include "IDComponent.hh"
 #include "TagComponent.hh"
 
@@ -35,7 +36,9 @@ namespace volt::runtime {
     friend class Entity;
     std::string m_name;
     bool m_running;
+    bool m_paused;
     ECS_t m_registry;
+    b2WorldId m_worldID;
     std::unordered_map<core::SnowflakeID::value_type, EID> m_ids;
   public:
     Scene(const std::string &name);
@@ -57,11 +60,13 @@ namespace volt::runtime {
     std::optional<Entity> FindEntityByID(core::SnowflakeID::value_type id);
     std::optional<Entity> FindEntityByName(const std::string &name);
     inline bool IsRunning(void) const noexcept { return m_running; }
+    inline bool IsPaused(void) const noexcept { return m_paused; }
     void Play(void) noexcept;
     void Pause(void) noexcept;
     void Stop(void) noexcept;
     inline const std::string &GetName(void) { return m_name; }
     inline void SetName(const std::string &name) { m_name = name; }
+    inline b2WorldId GetPhysicsWorld(void) { return m_worldID; }
   };
 
   template <IComponent_t T>
